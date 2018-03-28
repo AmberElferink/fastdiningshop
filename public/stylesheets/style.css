@@ -349,3 +349,8 @@ h1.sidenav {
     font-size: 1px;
     padding: 0;
 }
+
+
+.thumbnail {
+    border-style: solid;
+}

@@ -1,2 +1,168 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
+
+
+<!--- This menu is the context menu that is hidden at first but can be shown when the right mouse is clicked.
+The article will be changed with the context menu. -->
+<ul class="context-menu">
+    <li data-action="bold" onclick="functionBold();">Bold</li>
+    <li data-action="italic" onclick="functionItalic();">Italic</li>
+    <li data-action="pink" onclick="functionColorPink();">Text Color: Pink</li>
+    <li data-action="green" onclick="functionColorGreen();">Text Color: Green</li>
+    <li data-action="blue" onclick="functionColorBlue();">Text Color: Blue</li>
+</ul>
+
+<article>
+
+    <h1>What are you eating tonight?</h1>
+
+    <p>Have a look around! You will be able to find many quick to prepare and very tasty meals.
+        Impress your friends or parents maybe with your cooking skills, without a sweat of work.
+        Do you fancy a soup or rather have pasta? It's all there!</p>
+
+    <h2>Unit conversion</h2>
+
+    <p>
+        <b>Tbsp? Cups? But I just want milliliters!</b>
+        <br>
+        If you see a unit you don't completely understand, have a look at the table below.
+        With this, you can easily convert to another unit of your liking.
+    </p>
+
+</article>
+
+<table class="paleRedRows">
+    <thead>
+    <tr>
+        <th colspan="4">Volume</th>
+    </tr>
+    <tr>
+        <th>Teaspoons (tsp)</th>
+        <th>Tablespoons (tbsp)</th>
+        <th>mL = cm^3</th>
+        <th>Cups</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>1/3</td>
+        <td>5</td>
+        <td>1/48</td>
+    </tr>
+    <tr>
+        <td>3</td>
+        <td>1</td>
+        <td>15</td>
+        <td>1/16</td>
+    </tr>
+    <tr>
+        <td>20</td>
+        <td>6+2/3</td>
+        <td>100</td>
+        <td>5/12</td>
+    </tr>
+    <tr>
+        <td>48</td>
+        <td>16</td>
+        <td>240</td>
+        <td>1</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<table class="paleRedRows">
+    <thead>
+    <tr><th colspan="5">Mass</th></tr>
+    <tr>
+        <th>milligrams(mg)</th>
+        <th>grams(g)</th>
+        <th>grain(gr)</th>
+        <th>ounces(oz)</th>
+        <th>pounds(lb)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>0.001</td>
+        <td>0.0154</td>
+        <td>3.5274e-5</td>
+        <td>2.2046e-6</td>
+    </tr>
+    <tr>
+        <td>1000</td>
+        <td>1</td>
+        <td>15.432</td>
+        <td>0.0353</td>
+        <td>0.0022</td>
+    </tr>
+    <tr>
+        <td>64.8</td>
+        <td>0.0648</td>
+        <td>1</td>
+        <td>0.0023</td>
+        <td>1.4286e-4</td>
+    </tr>
+    <tr>
+        <td>28350</td>
+        <td>28.35</td>
+        <td>437.5</td>
+        <td>1</td>
+        <td>0.0625</td>
+    </tr>
+    <tr>
+        <td>453592</td>
+        <td>453.592</td>
+        <td>7000</td>
+        <td>16</td>
+        <td>1</td>
+
+    </tr>
+    </tbody>
+</table>
+
+<br>
+
+<table class="paleRedRows">
+    <thead>
+    <tr><th colspan="4">Length</th></tr>
+    <tr>
+        <th>millimeters(mm)</th>
+        <th>centimeters (cm)</th>
+        <th>inches("/in)</th>
+        <th>feet(ft)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>1</td>
+        <td>0.1</td>
+        <td>0.0394</td>
+        <td>0.0033</td>
+    </tr>
+    <tr>
+        <td>10</td>
+        <td>1</td>
+        <td>0.3937</td>
+        <td>0.0328</td>
+    </tr>
+    <tr>
+        <td>25.4</td>
+        <td>2.54</td>
+        <td>1</td>
+        <td>1/12 = 0.0833</td>
+    </tr>
+    <tr>
+        <td>304.8</td>
+        <td>30.48</td>
+        <td>12</td>
+        <td>1</td>
+    </tr>
+    </tbody>
+</table>
+<br>
+Credits: <a href="http://startcooking.com/measurement-and-conversion-charts" target="_blank">Startcooking, Measurement and Conversion Charts</a>
+and Google Unit Converter

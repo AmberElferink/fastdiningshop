@@ -1,0 +1,351 @@
+html, body {
+  height: 100%;
+}
+
+body
+{
+  padding: 50px;
+  font-family: "Calibri", serif;
+  color: black;
+  background-color: transparent;
+}
+
+
+h1
+{
+  color: #801D18;
+  text-align: center;
+}
+
+h2{
+  color: #B02721;
+}
+
+h3{
+  text-align: center;
+  color: #801D18;
+}
+
+a{
+  color: #B02721;
+
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #801D18;
+}
+
+.navigation {
+    float: left;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #B02721;
+}
+
+.navigation li {
+  float: left;
+}
+
+img {
+  width: 100%;
+}
+
+img.displayed{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+img.icon{
+  width:42px;
+  height:42px;
+  border:0;
+}
+
+#displayed{
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+  height: 315px;
+  frameborder: 0px;
+
+}
+
+.ingredients{
+  list-style-type: square;
+}
+
+table.paleRedRows {
+  font-family: "Calibri", serif;
+  border: 1px solid #FFFFFF;
+  width: 80%;
+  height: 200px;
+  text-align: center;
+  border-collapse: collapse;
+  padding: 5px 10px 5px 10px;
+}
+
+table.paleRedRows td, table.paleRedRows th {
+  border: 1px solid #FFFFFF;
+  padding: 3px 2px;
+}
+
+table.paleRedRows thead {
+  background: #B02721;
+  border-bottom: 5px solid #FFFFFF;
+}
+table.paleRedRows thead th {
+  font-size: 17px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  border-left: 2px solid #FFFFFF;
+}
+
+table.paleRedRows tbody tr:nth-child(even){
+  background: #FFEAEA;
+}
+
+table.paleRedRows tbody td {
+  font-size: 13px;
+}
+
+.shiftformenu {
+  margin-right: 350px; /* Same as the width of the sidenav */
+  padding: 0 15px;
+}
+
+aside.sidenav {
+  height: 100%;
+  width: 350px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: grey;
+  overflow-x: hidden;
+}
+
+
+
+.favorites {
+  height: 50%;
+  width: 340px;
+  float: right;
+  background: white;
+  overflow-y: auto;
+}
+
+.shoppinglist {
+  height: 50%;
+  width: 340px;
+  float: right;
+  background: white;
+  overflow-y: auto;
+}
+
+h1.sidenav {
+  margin: 0;
+  padding: 15px;
+  background-color: #B02721;
+  color: white;
+}
+
+.combinedPlots {
+  width: 950px;
+  height: 450px;
+  font-size: 14px;
+  line-height: 1.2em;
+}
+
+.plotCalories {
+  float: left;
+  width: 10%;
+  height: 450px;
+}
+
+.plotIngredients {
+  position: absolute;
+  left: 150px;
+  width: 70%;
+  min-width: 500px;
+  height: 450px;
+  font-size: 14px;
+  line-height: 1.2em;
+}
+
+
+.context-menu {
+  width: 200px;
+  height: auto;
+  box-shadow: 0 0 20px 0 #ccc;
+  position: absolute;
+  display: none;
+  background: white;
+  list-style: none;
+  padding: 5px 0px 5px 0px;
+
+
+}
+
+.context-menu li{
+  padding: 10px 5px 10px 5px;
+  border-left: 4px solid transparent;
+  cursor: pointer;
+
+}
+
+
+.context-menu li:hover{
+  background: #B02721;
+  color: white;
+}
+
+.closed{
+  width: 300px;
+  background: #FFEAEA;
+  margin:0;
+  max-height: 0px;
+  overflow: hidden;
+
+
+}
+
+.open {
+  max-height: 400px;
+  width: auto;
+  padding: 20px 20px 20px 20px;
+}
+
+
+.showmore  {
+  display:inline-block;
+  background: #B02721;
+  height: auto;
+  width: auto;
+  padding: 10px 10px 10px 10px;
+  color: white;
+}
+
+
+.showIngredients  {
+  display: inline-block;
+  background: #B02721;
+  height: auto;
+  width: auto;
+  padding: 10px 10px 10px 10px;
+  color: white;
+}
+
+
+.section
+{
+  width: 300px;
+  background: #FFEAEA;
+  margin:0;
+  overflow: hidden;
+  padding-left: 20px;
+  border-style: solid;
+  border: white;
+  border-width: 5px;
+}
+
+
+.boxTitle
+{
+  height: 50%;
+  width: 340px;
+  float: right;
+  overflow-y: auto;
+
+}
+
+
+
+.dropdown > a, .dropdown > button {
+    display: inline-block;
+}
+
+.dropdown > a:before, .dropdown > button:before {
+    z-index: 100;
+    position: absolute;
+    right: 7px;
+    top: 12px;
+    content: ' ';
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+}
+
+.dropdown input[type=checkbox] {
+    position: absolute;
+    display: block;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    opacity: 0;
+}
+
+.dropdown input[type=checkbox]:checked {
+    position: fixed;
+    z-index:+0;
+    top: 0px; left: 0px;
+    right: 0px; bottom: 0px;
+}
+
+.dropdown ul {
+    position: absolute;
+    top: 18px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    left: 0px;
+    list-style: none;
+    padding: 4px 0px;
+    display: none;
+    background-color: white;
+    box-shadow: 0 3px 6px rgba(0,0,0,.175);
+}
+
+.dropdown input[type=checkbox]:checked + ul {
+    display: block;
+}
+
+.dropdown ul li {
+    display: block;
+    padding: 6px 20px;
+    white-space: nowrap;
+    min-width: 100px;
+}
+
+.dropdown ul li:hover {
+    background-color: #F5F5F5;
+    cursor: pointer;
+}
+
+.dropdown ul li a {
+    text-decoration: none;
+    display: block;
+    color: black
+}
+
+.dropdown .divider {
+    height: 1px;
+    margin: 9px 0;
+    overflow: hidden;
+    background-color: #e5e5e5;
+    font-size: 1px;
+    padding: 0;
+}

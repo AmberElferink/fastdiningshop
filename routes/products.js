@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
     res.render('shop/products', { title: 'Buy Products' });
 });
 
-app.get('/ajaxcall', function (req, res) {
+router.get('/', function(req, res) {
     var data = {
         contactId: 1,
         firstName: 'John',

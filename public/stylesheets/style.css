@@ -4,7 +4,6 @@ html, body {
 
 body
 {
-  padding: 50px;
   font-family: "Calibri", serif;
   color: black;
   background-color: transparent;
@@ -50,6 +49,15 @@ li a:hover {
   padding: 0;
   overflow: hidden;
   background-color: #B02721;
+}
+
+.dropdown-toggle {
+    background-color: #B02721;
+    color: white;
+}
+.dropdown-toggle:hover {
+    background-color: #801D18;
+    color: white;
 }
 
 .navigation li {
@@ -218,8 +226,6 @@ h1.sidenav {
   margin:0;
   max-height: 0px;
   overflow: hidden;
-
-
 }
 
 .open {
@@ -246,19 +252,6 @@ h1.sidenav {
   width: auto;
   padding: 10px 10px 10px 10px;
   color: white;
-}
-
-
-.section
-{
-  width: 300px;
-  background: #FFEAEA;
-  margin:0;
-  overflow: hidden;
-  padding-left: 20px;
-  border-style: solid;
-  border: white;
-  border-width: 5px;
 }
 
 

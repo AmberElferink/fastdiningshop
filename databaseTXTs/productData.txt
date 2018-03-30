@@ -1,0 +1,59 @@
+CREATE TABLE Persons (
+personid integer primary key autoincrement,
+firstname varchar(255) not null,
+surname varchar(255) not null,
+address varchar(255) not null,
+city varchar(255) not null,
+username varchar(255) not null unique,
+password varchar(255) not null,
+emailaddress varchar(255) not null
+);
+
+CREATE TABLE Products (
+barcode integer primary key,
+name varchar(255) not null,
+price float not null,
+quantity integer not null,
+unit varchar(255) default gram,
+manufacturer varchar(255) not null,
+description text,
+CONSTRAINT CheckUnit CHECK(unit="gram" OR unit="ml"),
+CONSTRAINT CheckPrice CHECK(price > 0)
+);
+
+--categories of products, like diary or meat
+CREATE TABLE Categories (
+productid integer,
+category varchar(255),
+FOREIGN KEY(productid)REFERENCES Products(productid),
+CONSTRAINT Category PRIMARY KEY (productid, category)
+);
+
+CREATE TABLE ShoppinglistsProducts (
+shoplistid integer not null,
+productid integer not null,
+quantity integer not null CHECK (quantity > 0),
+CONSTRAINT Shop_Prod PRIMARY KEY (shoplistid, productid),
+ FOREIGN KEY(shoplistid)REFERENCES Shoppinglists(shoplistid),
+ FOREIGN KEY(productid)REFERENCES Products(productid)
+);
+
+CREATE TABLE Shoppinglists (
+shoplistid integer not null primary key autoincrement,
+customerid integer not null,
+ FOREIGN KEY(customerid)REFERENCES Customers(personid)
+);
+
+
+CREATE TABLE OrderShoppinglists (
+orderid integer not null,
+shoplistid integer not null,
+CONSTRAINT Order_id PRIMARY KEY (orderid, shoplistid),
+ FOREIGN KEY(orderid)REFERENCES Orders(orderid),
+ FOREIGN KEY(shoplistid)REFERENCES Shoppinglists(shoplistid)
+);
+
+CREATE TABLE Orders (
+orderid integer not null primary key autoincrement,
+date text not null
+);

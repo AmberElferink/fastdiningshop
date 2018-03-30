@@ -17,7 +17,7 @@ db.each("SELECT * FROM Products", [], function(err, row){
     {
         return console.error(err.message);
     }
-       console.log(row.name, row.price, row.quantity, row.unit, )
+    console.log(row.name, row.price, row.quantity, row.unit, )
 });
 
 

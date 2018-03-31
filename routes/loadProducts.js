@@ -41,6 +41,38 @@ var express = require('express');
 var router = express.Router();
 
 
+
+var ProductBox = class {
+    constructor(barcode, name, price, volume, manufacturer, description){
+        this.draw = function () {
+            var box = document.createElement("article");
+
+            var title = document.createElement("h1");
+            title.setAttribute("class", "productName");
+            var textnode = document.createTextNode(name);
+            title.appendChild(textnode);
+            box.appendChild(title);
+
+            var manuf = document.createElement("p");
+            manuf.setAttribute("class", "productManuf");
+            var textnode = document.createTextNode("Manufacturer: " + manufacturer);
+            manuf.appendChild(textnode);
+            box.appendChild(manuf);
+
+            var button = document.createElement('button');
+            button.setAttribute("class", "addToCart");
+            button.appendChild(document.createTextNode("Add to cart"));
+            box.appendChild(button);
+
+            this.addAttributes(box);
+
+            $(".row")[0].appendChild(box);
+        };
+    };
+};
+
+
+
 /* GET home page. */
 router.get('/products', function (req, res) {
     console.log(req.query);

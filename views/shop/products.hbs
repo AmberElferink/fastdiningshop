@@ -1,4 +1,4 @@
-<section class="row">
+<!--<section class="row">
     <section class="col-sm-6 col-md-4">
         <article class="thumbnail">
             <img src="#" alt="...">
@@ -10,15 +10,16 @@
             </section>
         </article>
     </section>
-</section>
+</section>-->
+
+<section class="row"></section>
 
 <script>
     function get(product) {
         $.ajax({
-            type: 'POST',
-            url: '/api/products?product='+product+'&abc=123',
+            type: 'GET',
+            url: '/api/products',
             dataType: 'json',
-            data: {"hello":product}
         })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
         //als het goed is gegaan, callt hij de .done hieronder.
                 .done(function (data) {

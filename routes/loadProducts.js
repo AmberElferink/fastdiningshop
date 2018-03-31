@@ -50,11 +50,12 @@ var router = express.Router();
 router.get('/products', function (req, res) {
     console.log(req.query);
     var data = {
-        contactId: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@domain.com',
-        phone: '9876454'
+        barcode: 3468999090,
+        name: "Pepper",
+        price: 3.00,
+        volume: 300 + "g",
+        manufacturer: "APPIEHIJNNN",
+        description: "Ik ben stiekem een banaan"
     };
     res.send(data);
 });

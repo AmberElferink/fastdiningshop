@@ -39,9 +39,10 @@ var x;
 for (x in product) {
     txt += person[x] + " ";
 }
-get();
 window.productInfo = {};
+get();
 console.log("productinfo " + window.productInfo);
+//dit was asynchroon, daarom deed hij het niet
 function get() {
     $.ajax({
         type: 'GET',
@@ -53,7 +54,7 @@ function get() {
             console.log(data);
             //deze done functie logt het naar de javascript console en print het op de pagina als txt
             console.log('GET response:', JSON.stringify(data, "", 2));
-            window.productInfo = JSON.stringify(data,"", 2);
+            window.productInfo = data;
 
         })
         //als het niet goed is gegaan, doet hij de fail hieronder

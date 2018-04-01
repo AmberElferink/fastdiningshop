@@ -1,3 +1,4 @@
+//roept de callback functie getProducts aan, die met een GET de producten uit de database inlaadt en tekent.
 getProducts(function (returnValues) {
     for(let i = 0; i<returnValues.length; i++)
     {
@@ -35,14 +36,6 @@ var ProductBox = class {
         };
     };
 };
-
-
-
-product1 = new ProductBox(
-    3468999090, "name", 3.00, 300 + "g", "APPIEHIJNNN", "Ik ben stiekem een banaan"
-);
-product1.draw();
-
 
 
 

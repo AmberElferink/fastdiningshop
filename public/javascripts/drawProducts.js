@@ -6,8 +6,25 @@ getProducts(function (returnValues) {
             returnValues[i].barcode, returnValues[i].name, returnValues[i].price, returnValues[i].quantity + " " + returnValues[i].unit, returnValues[i].manufacturer, returnValues[i].description
         );
         product.draw();
-        console.log(returnValues[i].barcode);
     }
+});
+
+
+//search string
+
+$("#productSearch").keyup(function (e) {
+ console.log(this.value);
+ $("#productBox").empty(); //verwijdert alle producten
+    
+    searchProducts(function (returnValues) {
+        for(let i = 0; i<returnValues.length; i++)
+        {
+            product = new ProductBox(
+                returnValues[i].barcode, returnValues[i].name, returnValues[i].price, returnValues[i].quantity + " " + returnValues[i].unit, returnValues[i].manufacturer, returnValues[i].description
+            );
+            product.draw();
+        }
+    }, "?products=" + this.value);
 });
 
 var ProductBox = class {
@@ -57,3 +74,46 @@ function getProducts(callback) {
         });
 }
 
+function searchProducts(callback, search) {
+    if(!search)
+    {
+        search = "";
+    }
+    $.ajax({
+        type: 'GET',
+        url: '/api/products'+search,
+        dataType: 'json',
+    })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
+    //als het goed is gegaan, callt hij de .done hieronder.
+        .done(function (data) {
+            //deze done functie logt het naar de javascript console en print het op de pagina als txt
+            //console.log('GET response:', JSON.stringify(data, "", 2));
+            callback(data);
+        })
+        //als het niet goed is gegaan, doet hij de fail hieronder
+        .fail(function (jqXHR, textStatus, err) {
+            console.log('AJAX error response:', textStatus);
+        });
+}
+
+/*<script>
+    function get(product) {
+        $.ajax({
+            type: 'POST',
+            url: '/api/products?product='+product+'&abc=123',
+            dataType: 'json',
+            data: {"hello":product}
+        })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
+        //als het goed is gegaan, callt hij de .done hieronder.
+                .done(function (data) {
+                    console.log(data);
+                    //deze done functie logt het naar de javascript console en print het op de pagina als txt
+                    console.log('GET response:', JSON.stringify(data, "", 2));
+                    $('#getResponse').html(JSON.stringify(data, "", 2));
+                })
+                //als het niet goed is gegaan, doet hij de fail hieronder
+                .fail(function (jqXHR, textStatus, err) {
+                    console.log('AJAX error response:', textStatus);
+                });
+    }
+</script>*/

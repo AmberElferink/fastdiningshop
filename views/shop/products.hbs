@@ -13,27 +13,8 @@
 </section>-->
 
 <h1>{{title}}</h1>
-<section>{{product}}</section>
 
-<section class="row"></section>
+<input type="text" id="productSearch" placeholder="search for products">
+<section id="productBox" class="row"></section>
 
-<script>
-    function get(product) {
-        $.ajax({
-            type: 'GET',
-            url: '/api/products',
-            dataType: 'json',
-        })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
-        //als het goed is gegaan, callt hij de .done hieronder.
-                .done(function (data) {
-                    console.log(data);
-                    //deze done functie logt het naar de javascript console en print het op de pagina als txt
-                    console.log('GET response:', JSON.stringify(data, "", 2));
-                    $('#getResponse').html(JSON.stringify(data, "", 2));
-                })
-                //als het niet goed is gegaan, doet hij de fail hieronder
-                .fail(function (jqXHR, textStatus, err) {
-                    console.log('AJAX error response:', textStatus);
-                });
-    }
-</script>
+

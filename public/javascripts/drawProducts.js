@@ -41,8 +41,8 @@ for (x in product) {
 }
 window.productInfo = {};
 get();
-console.log("productinfo " + window.productInfo);
-//dit was asynchroon, daarom deed hij het niet
+setTimeout(function(){console.log("productinfo ", window.productInfo);}, 1000);
+
 function get() {
     $.ajax({
         type: 'GET',

@@ -1,6 +1,3 @@
-//This file retrieves queries from the database.
-
-
 /* /products de GET knop geeft nu John Doe
 /api/products bevat de John Doe
 
@@ -50,63 +47,12 @@ var router = express.Router();
 //Ctrl+D = regel dupliceren
 //Alt+Shift+pijtjeOmhoog/pijltjeBeneden is regel omhoog en naar beneden verplaatsen
 
-//vangt gets op van drawProducts.js
-router.get('/product', function (req, res) {
-    //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
-    //alles binnen deze functie doet hij pas nadat de callback is uitgevoerd. Als je res.send(data);
-    //dus onder de }); zet, dan krijg je undefined terug omdat de callback nog niet klaar was, toen hij was uitgevoerd
-    readProductsOnBarcodeFromDatabase(function(err, returnValues){
-        var data = returnValues;
-        res.send(data);
-    },req.query);
-});
-
-
-function readProductsOnBarcodeFromDatabase(callback, query) {
-    //creates a new database
-    let db = new sqlite3.Database(file, (err) => {
-        if (err) {
-            return console.error(err.message);
-        }
-        console.log('Connected to the database');
-
-    });
-    db.serialize(function () {
-        console.log(query);
-        if (query.products == undefined) {
-            db.all("SELECT * FROM Products", [], function (err, rows) {
-                if (err) {
-                    return callback(err);
-                }
-                //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
-                //en dan zijn de returnValues dus undefined
-                callback(undefined, rows);
-            });
-        }
-        else {
-            console.log(query.products); //query.products is wat ingetypt is, dus waar de query op moet werken
-            db.all("SELECT * FROM Products WHERE Products.name LIKE 'fet'", [], function (err, rows) {
-                if (err) {
-                    return callback(err);
-                }
-                //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
-                //en dan zijn de returnValues dus undefined
-                callback(undefined, rows);
-            });
-        }
-
-    });
-}
-
-
-
-
-//vangt gets op van drawProducts.js
+/* GET home page. */
 router.get('/products', function (req, res) {
     //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
     //alles binnen deze functie doet hij pas nadat de callback is uitgevoerd. Als je res.send(data);
     //dus onder de }); zet, dan krijg je undefined terug omdat de callback nog niet klaar was, toen hij was uitgevoerd
-    readProductsOnNameFromDatabase(function(err, returnValues){
+    readProductsFromDatabase(function(err, returnValues){
         var data = returnValues;
         res.send(data);
     },req.query);
@@ -120,7 +66,7 @@ module.exports = router;
 
 
 
-function readProductsOnNameFromDatabase(callback, query){
+function readProductsFromDatabase(callback, query){
     //creates a new database
     let db = new sqlite3.Database(file, (err) => {
         if (err) {

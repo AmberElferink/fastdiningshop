@@ -1,3 +1,14 @@
+getProducts(function (returnValues) {
+    for(let i = 0; i<returnValues.length; i++)
+    {
+        product = new ProductBox(
+            returnValues[i].barcode, returnValues[i].name, returnValues[i].price, returnValues[i].quantity + " " + returnValues[i].unit, returnValues[i].manufacturer, returnValues[i].description
+        );
+        product.draw();
+        console.log(returnValues[i].barcode);
+    }
+});
+
 var ProductBox = class {
     constructor(barcode, name, price, volume, manufacturer, description){
         this.draw = function () {
@@ -33,9 +44,7 @@ product1 = new ProductBox(
 product1.draw();
 
 
-getProducts(function (returnValues) {
-    console.log(returnValues);
-});
+
 
 function getProducts(callback) {
     $.ajax({

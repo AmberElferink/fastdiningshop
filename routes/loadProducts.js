@@ -48,7 +48,6 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/products', function (req, res) {
-    console.log(req.query);
     var data = {
         barcode: 3468999090,
         name: "Pepper",
@@ -77,23 +76,46 @@ router.post('/products', function (req, res) {
 module.exports = router;
 
 
-console.log(file);
-//creates a new database
-let db = new sqlite3.Database(file, (err) => {
-    if (err) {
-        return console.error(err.message);
-    }
-    console.log('Connected to the in-memory SQlite database');
+
+
+
+
+
+function readProductsFromDatabase(callback){
+    //creates a new database
+    let db = new sqlite3.Database(file, (err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log('Connected to the database');
+    });
+
+    db.serialize(function () {
+        db.all("SELECT * FROM Products", [], function(err, rows){
+            if(err)
+            {
+                return callback(err);
+            }
+            //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
+            //en dan zijn de returnValues dus undefined
+            callback(undefined, rows);
+        });
+
+    });
+    //wacht tot alle queries klaar zijn en sluit de database dan af
+    db.close((err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log('Close the database connection.');
+    });
+};
+
+readProductsFromDatabase(function(err, returnValues){
+    console.log(returnValues);
 });
 
 
-db.each("SELECT * FROM Products", [], function(err, row){
-    if(err)
-    {
-        return console.error(err.message);
-    }
-    console.log(row.name, row.price, row.quantity, row.unit, )
-});
 
 
 
@@ -119,11 +141,5 @@ Als je dingen zou willen toevoegen aan de database:
 
 
 
-//wacht tot alle queries klaar zijn en sluit de database dan af
-db.close((err) => {
-    if (err) {
-        return console.error(err.message);
-    }
-    console.log('Close the database connection.');
-});
+
 

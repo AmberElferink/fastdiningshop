@@ -7,7 +7,8 @@ var expressHbs = require('express-handlebars');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var productRouter = require('./routes/products');
+var productsRouter = require('./routes/products');
+var productDescriptionRouter = require('./routes/productDescription');
 var loadProducts = require('./routes/loadProducts');
 
 var app = express();
@@ -24,7 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/home', indexRouter);
 app.use('/users', usersRouter);
-app.use('/products', productRouter);
+app.use('/products', productsRouter);
+app.use('/product', productDescriptionRouter);
 
 app.use('/api', loadProducts);
 

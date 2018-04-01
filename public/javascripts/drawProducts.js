@@ -8,10 +8,10 @@ drawProducts(returnValues);
 //terwijl je typt updaten de producten om te voldoen aan wat je zoekt
 $("#productSearch").keyup(function (e) {
     console.log(this.value);
-    $("#productBox").empty(); //verwijdert alle producten
+    $("#productBox").empty(); //verwijdert alle producten voor het zoeken
 
     searchProducts(function (returnValues) {
-        drawProducts();
+        drawProducts(returnValues);
     }, "?products=" + this.value);
 });
 
@@ -33,11 +33,15 @@ var ProductBox = class {
         this.draw = function () {
             var box = document.createElement("article");
 
+
+            var link = document.createElement("a");
+            link.setAttribute("href", "/product/"+  barcode);
             var title = document.createElement("h1");
             title.setAttribute("class", "productName");
             var textnode = document.createTextNode(name);
             title.appendChild(textnode);
-            box.appendChild(title);
+            link.appendChild(title);
+            box.appendChild(link);
 
             var manuf = document.createElement("p");
             manuf.setAttribute("class", "productManuf");

@@ -39,9 +39,9 @@ var x;
 for (x in product) {
     txt += person[x] + " ";
 }
-window.productInfo = {};
+var productInfo = {};
 get();
-setTimeout(function(){console.log("productinfo ", window.productInfo);}, 1000);
+setTimeout(function(){console.log("productinfo ", productInfo.barcode);}, 1000);
 
 function get() {
     $.ajax({
@@ -54,7 +54,7 @@ function get() {
             console.log(data);
             //deze done functie logt het naar de javascript console en print het op de pagina als txt
             console.log('GET response:', JSON.stringify(data, "", 2));
-            window.productInfo = data;
+            productInfo = data;
 
         })
         //als het niet goed is gegaan, doet hij de fail hieronder

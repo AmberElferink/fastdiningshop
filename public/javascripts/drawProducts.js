@@ -1,5 +1,23 @@
 //roept de callback functie getProducts aan, die met een GET de producten uit de database inlaadt en tekent.
-getProducts(function (returnValues) {
+//laadt alle producten als je voor het eerst op de pagina komt
+searchProducts(function (returnValues) {
+drawProducts(returnValues);
+});
+
+
+//terwijl je typt updaten de producten om te voldoen aan wat je zoekt
+$("#productSearch").keyup(function (e) {
+    console.log(this.value);
+    $("#productBox").empty(); //verwijdert alle producten
+
+    searchProducts(function (returnValues) {
+        drawProducts();
+    }, "?products=" + this.value);
+});
+
+
+//tekent de productboxen
+function drawProducts(returnValues) {
     for(let i = 0; i<returnValues.length; i++)
     {
         product = new ProductBox(
@@ -7,26 +25,9 @@ getProducts(function (returnValues) {
         );
         product.draw();
     }
-});
+}
 
-
-//search string
-
-$("#productSearch").keyup(function (e) {
- console.log(this.value);
- $("#productBox").empty(); //verwijdert alle producten
-    
-    searchProducts(function (returnValues) {
-        for(let i = 0; i<returnValues.length; i++)
-        {
-            product = new ProductBox(
-                returnValues[i].barcode, returnValues[i].name, returnValues[i].price, returnValues[i].quantity + " " + returnValues[i].unit, returnValues[i].manufacturer, returnValues[i].description
-            );
-            product.draw();
-        }
-    }, "?products=" + this.value);
-});
-
+//classe die wordt gebruikt om productboxen aan te maken
 var ProductBox = class {
     constructor(barcode, name, price, volume, manufacturer, description){
         this.draw = function () {
@@ -55,25 +56,7 @@ var ProductBox = class {
 };
 
 
-
-function getProducts(callback) {
-    $.ajax({
-        type: 'GET',
-        url: '/api/products',
-        dataType: 'json',
-    })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
-    //als het goed is gegaan, callt hij de .done hieronder.
-        .done(function (data) {
-            //deze done functie logt het naar de javascript console en print het op de pagina als txt
-            //console.log('GET response:', JSON.stringify(data, "", 2));
-            callback(data);
-        })
-        //als het niet goed is gegaan, doet hij de fail hieronder
-        .fail(function (jqXHR, textStatus, err) {
-            console.log('AJAX error response:', textStatus);
-        });
-}
-
+//zoekt producten in de database
 function searchProducts(callback, search) {
     if(!search)
     {

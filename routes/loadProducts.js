@@ -55,7 +55,7 @@ router.get('/products', function (req, res) {
     readProductsFromDatabase(function(err, returnValues){
         var data = returnValues;
         res.send(data);
-    });
+    },req.query);
 });
 
 module.exports = router;
@@ -66,27 +66,44 @@ module.exports = router;
 
 
 
-function readProductsFromDatabase(callback){
+function readProductsFromDatabase(callback, query){
     //creates a new database
     let db = new sqlite3.Database(file, (err) => {
         if (err) {
             return console.error(err.message);
         }
         console.log('Connected to the database');
-    });
 
+    });
     db.serialize(function () {
-        db.all("SELECT * FROM Products", [], function(err, rows){
-            if(err)
-            {
-                return callback(err);
-            }
-            //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
-            //en dan zijn de returnValues dus undefined
-            callback(undefined, rows);
-        });
+        console.log(query);
+        if(query.products == undefined) {
+            db.all("SELECT * FROM Products", [], function (err, rows) {
+                if (err) {
+                    return callback(err);
+                }
+                //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
+                //en dan zijn de returnValues dus undefined
+                callback(undefined, rows);
+            });
+        }
+        else
+        {
+            console.log(query.products); //query.products is wat ingetypt is, dus waar de query op moet werken
+            db.all("SELECT * FROM Products WHERE Products.name LIKE 'fet'", [], function (err, rows) {
+                if (err) {
+                    return callback(err);
+                }
+                //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
+                //en dan zijn de returnValues dus undefined
+                callback(undefined, rows);
+            });
+        }
 
     });
+
+
+
     //wacht tot alle queries klaar zijn en sluit de database dan af
     db.close((err) => {
         if (err) {

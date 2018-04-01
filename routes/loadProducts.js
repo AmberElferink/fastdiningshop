@@ -58,17 +58,6 @@ router.get('/products', function (req, res) {
     });
 });
 
-router.post('/products', function (req, res) {
-   console.log(req.query);
-   console.log(req.body);
-
-    //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
-    readProductsFromDatabase(function(err, returnValues){
-        var data = returnValues;
-    });
-    res.send(data);
-});
-
 module.exports = router;
 
 

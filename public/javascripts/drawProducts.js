@@ -32,18 +32,12 @@ product1 = new ProductBox(
 );
 product1.draw();
 
-console.log("Get gives: " + get());
-var txt = "";
-var product = get();
-var x;
-for (x in product) {
-    txt += person[x] + " ";
-}
-var productInfo = {};
-get();
-setTimeout(function(){console.log("productinfo ", productInfo.barcode);}, 1000);
 
-function get() {
+getProducts(function (returnValues) {
+    console.log(returnValues);
+});
+
+function getProducts(callback) {
     $.ajax({
         type: 'GET',
         url: '/api/products',
@@ -52,10 +46,8 @@ function get() {
     //als het goed is gegaan, callt hij de .done hieronder.
         .done(function (data) {
             //deze done functie logt het naar de javascript console en print het op de pagina als txt
-            console.log('GET response:', JSON.stringify(data, "", 2));
-            productInfo = data;
-            drawProducts(data);
-
+            //console.log('GET response:', JSON.stringify(data, "", 2));
+            callback(data);
         })
         //als het niet goed is gegaan, doet hij de fail hieronder
         .fail(function (jqXHR, textStatus, err) {
@@ -63,7 +55,3 @@ function get() {
         });
 }
 
-function drawProducts(data) {
-
-
-}

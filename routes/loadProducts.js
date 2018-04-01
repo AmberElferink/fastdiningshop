@@ -109,8 +109,7 @@ function readProductsFromDatabase(callback){
         }
         console.log('Close the database connection.');
     });
-};
-
+                  //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
 readProductsFromDatabase(function(err, returnValues){
     console.log(returnValues);
 });

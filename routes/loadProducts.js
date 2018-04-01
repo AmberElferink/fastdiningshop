@@ -44,32 +44,28 @@ var router = express.Router();
 
 
 
-
+//Ctrl+D = regel dupliceren
+//Alt+Shift+pijtjeOmhoog/pijltjeBeneden is regel omhoog en naar beneden verplaatsen
 
 /* GET home page. */
 router.get('/products', function (req, res) {
-    var data = {
-        barcode: 3468999090,
-        name: "Pepper",
-        price: 3.00,
-        volume: 300 + "g",
-        manufacturer: "APPIEHIJNNN",
-        description: "Ik ben stiekem een banaan"
-    };
-    res.send(data);
+    //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
+    //alles binnen deze functie doet hij pas nadat de callback is uitgevoerd. Als je res.send(data);
+    //dus onder de }); zet, dan krijg je undefined terug omdat de callback nog niet klaar was, toen hij was uitgevoerd
+    readProductsFromDatabase(function(err, returnValues){
+        var data = returnValues;
+        res.send(data);
+    });
 });
 
 router.post('/products', function (req, res) {
-    console.log(req.query);
-    console.log(req.body);
+   console.log(req.query);
+   console.log(req.body);
 
-    var data = {
-        contactId: 1,
-        firstName: 'John',
-        lastName: 'Doe',
-        email: 'john.doe@domain.com',
-        phone: '9876454'
-    };
+    //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
+    readProductsFromDatabase(function(err, returnValues){
+        var data = returnValues;
+    });
     res.send(data);
 });
 
@@ -108,11 +104,8 @@ function readProductsFromDatabase(callback){
             return console.error(err.message);
         }
         console.log('Close the database connection.');
-    });
-                  //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
-readProductsFromDatabase(function(err, returnValues){
-    console.log(returnValues);
-});
+    });}
+
 
 
 

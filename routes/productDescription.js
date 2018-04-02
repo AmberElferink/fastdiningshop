@@ -10,4 +10,5 @@ router.get('/:barcode', function(req, res, next) {
     res.render('product', {title: 'Buy Products', layout: 'productDescriptionLayout', description: 'ik ben een banaan'});
 });
 
+
 module.exports = router;

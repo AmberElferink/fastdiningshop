@@ -3,6 +3,8 @@ searchProducts(function (returnValues) {
     drawProducts(returnValues);
 }, "?products=" + this.value);
 
+console.log(document.location.href);
+
 
 //zoekt producten in de database
 function searchProducts(callback, search) {

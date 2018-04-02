@@ -43,7 +43,6 @@ var router = express.Router();
 
 
 
-
 //Ctrl+D = regel dupliceren
 //Alt+Shift+pijtjeOmhoog/pijltjeBeneden is regel omhoog en naar beneden verplaatsen
 

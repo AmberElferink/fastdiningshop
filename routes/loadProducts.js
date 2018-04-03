@@ -47,7 +47,7 @@ var router = express.Router();
 //Alt+Shift+pijtjeOmhoog/pijltjeBeneden is regel omhoog en naar beneden verplaatsen
 
 /* GET home page. */
-router.get('/products', function (req, res) {
+router.get('/', function (req, res) {
     //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
     //alles binnen deze functie doet hij pas nadat de callback is uitgevoerd. Als je res.send(data);
     //dus onder de }); zet, dan krijg je undefined terug omdat de callback nog niet klaar was, toen hij was uitgevoerd
@@ -100,16 +100,14 @@ function readProductsFromDatabase(callback, query){
         }
 
     });
-
-
-
     //wacht tot alle queries klaar zijn en sluit de database dan af
     db.close((err) => {
         if (err) {
             return console.error(err.message);
         }
         console.log('Close the database connection.');
-    });}
+    });
+}
 
 
 

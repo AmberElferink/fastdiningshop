@@ -1,9 +1,12 @@
 //doet momenteel helemaal niets. Moet verwijderd als er niets aan toegevoegd wordt uiteindelijk
 searchProducts(function (returnValues) {
-    drawProducts(returnValues);
-}, "?products=" + this.value);
+    getProperties(returnValues);
+}, "?productbarcode=" + document.location.href);
 
-console.log(document.location.href);
+function getProperties (returnValues) {
+    console.log(returnValues[i].barcode, returnValues[i].name, returnValues[i].price, returnValues[i].quantity + " " + returnValues[i].unit, returnValues[i].manufacturer, returnValues[i].description);
+
+}
 
 
 //zoekt producten in de database

@@ -9,7 +9,10 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var productsRouter = require('./routes/products');
 var productDescriptionRouter = require('./routes/productDescription');
+
+//database communicatie bestanden
 var loadProducts = require('./routes/loadProducts');
+var loadProductDescription = require('./routes/loadProductDescription');
 
 var app = express();
 
@@ -28,7 +31,8 @@ app.use('/users', usersRouter);
 app.use('/products', productsRouter);
 app.use('/product', productDescriptionRouter);
 
-app.use('/api', loadProducts);
+app.use('/api/products', loadProducts);
+app.use('/api/product', loadProductDescription);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

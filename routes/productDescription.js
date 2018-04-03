@@ -5,10 +5,9 @@ var router = express.Router();
 
 
 //
-router.get('/:barcode', function(req, res, next) {
+router.get('/', function(req, res, next) {
     res.render('product', {title: 'Buy Products', layout: 'productDescriptionLayout'});
 });
-
 
 
 module.exports = router;

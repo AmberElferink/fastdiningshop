@@ -21,24 +21,19 @@
 }
 
 */
-
-function validate()
-{
+function validate() {
     var un = document.login.username.value;
     var pw = document.login.password.value;
     var valid = false;
-    var usernameArray = ["bob","patricia"];
-    var passwordArray = ["hallo","123"];
-    for (var i = 0; i < usernameArray.length; i++)
-    {
-        if ((un == usernameArray[i]) && (pw == passwordArray[i])){
+    var usernameArray = ["Vlad", "bob"];
+    var passwordArray = ["12345", "hallo"];
+    for (var i = 0; i < usernameArray.length; i++) {
+        if ((un == usernameArray[i]) && (pw == passwordArray[i])) {
             valid = true;
             break;
         }
     }
-
-    if (valid)
-    {
-        alert("Login was succesfull");
+    if (valid) {
+        alert("Login was successful");
     }
 }

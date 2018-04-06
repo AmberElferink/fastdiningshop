@@ -347,3 +347,7 @@ h1.sidenav {
 .thumbnail {
     border-style: solid;
 }
+
+.productBox {
+    display: block;
+}

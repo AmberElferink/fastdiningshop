@@ -344,10 +344,16 @@ h1.sidenav {
 }
 
 
-.thumbnail {
-    border-style: solid;
+.content{
+    padding: 30px;
+    margin: auto;
+    float: left;
 }
 
 .productBox {
     display: block;
+    border-style: solid;
+    border-radius: 5px;
+    width: 500px;
+    padding: 15px;
 }

@@ -2,8 +2,6 @@ CREATE TABLE Persons (
 personid integer primary key autoincrement,
 firstname varchar(255) not null,
 surname varchar(255) not null,
-address varchar(255) not null,
-city varchar(255) not null,
 username varchar(255) not null unique,
 password varchar(255) not null,
 emailaddress varchar(255) not null
@@ -17,6 +15,7 @@ quantity integer not null,
 unit varchar(255) default gram,
 manufacturer varchar(255) not null,
 description text,
+image text,
 CONSTRAINT CheckUnit CHECK(unit="gram" OR unit="ml"),
 CONSTRAINT CheckPrice CHECK(price > 0)
 );

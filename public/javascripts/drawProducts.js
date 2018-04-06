@@ -40,6 +40,11 @@ var ProductBox = class {
             title.appendChild(textnode);
             box.appendChild(title);
 
+            var imageEl = document.createElement("img");
+            imageEl.setAttribute("class", "productImage");
+            imageEl.setAttribute("src", "/images/products/" + "wortels" +".jpg")
+            box.appendChild(imageEl);
+
             var priceEl = document.createElement("p");
             priceEl.setAttribute("class", "price");
             textnode = document.createTextNode("€ "+ price);

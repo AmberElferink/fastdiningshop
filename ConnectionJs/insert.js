@@ -10,6 +10,10 @@ let db = new sqlite3.Database('fastdining.db', (err) => {
 
 
 db.all("SELECT * FROM Persons", [], function(err, rows){
+    if(err)
+    {
+        return console.error(err.message);
+    }
     console.log(rows);
 });
 

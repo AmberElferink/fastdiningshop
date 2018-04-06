@@ -1,0 +1,121 @@
+
+
+--This part contains the personal information of users of the site
+
+
+INSERT INTO Persons (firstname, surname, username, password, emailaddress) VALUES
+("Gordon", "Ramsey", "Gordon", "Ihidmyselfinfood33", "gordanramsey@loveramsey.nl"),
+("Mannetje", "van der Radio", "mannetje", "hallohallowiestinkthierzo5", "radio123@hotmail.com"),
+("Sara", "Hildebrand", "Saraaatje", "ILoveFood4Life", "sarahildebrand@live.nl"),
+("Bart", "Smith", "AlexanderisBom", "Bartiseenheld85", "info@everybodyisnamedsmith.nl"),
+("Fatima", "van Schoonhoven", "FatimaLove", "345Glq8&", "fatimalovehartje@gmail.com"),
+("Patrick", "Sherman", "Dentist", "HelloNemo6", "patrickkcirtap@hotmail.com");
+
+
+--This part contains the information of 30 products
+
+
+INSERT INTO Products (barcode, name, price, quantity, unit, manufacturer, description, image) VALUES
+(672057684020, "watermelon", 2.50, 1500, "gram", "Dole", "A fresh, whole and delicious watermelon.", null),
+(675890294857, "olive oil", 3.90, 1000, "ml", "Bertolli", "Olive oil for cooking and salads.", null),
+(004802347892, "feta", 1.99, 250, "gram", "Apetina", "Feta for delicious salads.", "feta"),
+(204928376269, "cut carrots", 2.30, 300, "gram", "Albert Heijn", "Bolthouse Farms(r) Premium Baby-Cut Carrots save time in the kitchen and ensure that the healthy choice is the easy choice. They are a great no-mess, healthful snack that brings people together. They are great for parties. Pair them with dips and dressings for the perfect party tray.", "wortels"),
+(378436780982, "milk", 1.30, 500, "ml", "Campina", "Our farmers have pledged to not treat any of their cows with any artificial growth hormones. According to the FDA, no significant difference has been shown between milk derived from rBST treated and non-rBST treated cows.", null),
+(935434206823, "nutella", 3.90, 630, "gram", "Ferrero SpA", "Nutella hazelnut spread is a happy start to your day! Enjoy it with whole grain toast, pancakes, strawberries, bananas, and many other foods. The Original Hazelnut Spread Spread the Happy.", null),
+(243689432079, "tortilla wraps", 3.20, 300, "gram", "Albert Heijn", "Tortillas deliver an authentic flavour that will give you a taste of tradition in your own home. Pair them with your favourite Mexican dish to experience a wonderful flavor combination.", null),
+(682392327978, "gnocchi", 2.50, 300, "gram", "Grand'Italia", "This dish cooks in 1-2 minutes and provides you with a good source of protein and fibers. Gnocchi with potato also contains low cholesterol and low fat so it is good and wholesome for you.", null),
+(356206034905, "chopped spinach", 0.75, 500, "gram", "Birds Eye", "This contains no preservatives. Leaf Spinach meets the highest standard in freshness and flavour because it is packed from fresh spinach.", null),
+(234578376523, "ricotta", 2.30, 250, "ml", "Grand'Italia", "Ricotta Cheese is a delicious Italian-style cheese that is made with whole milk. This cheese has a delicious mild taste and a rich creamy texture that goes great with dozens of dishes. The versatility of this cheese makes it great as a spread, dip, topping, filling or ingredient. Use it make lasagnas, stuffed shells and other tasty Italian dishes.", null),
+(326823097894, "parmesan cheese", 4.50, 200, "gram", "Albert Heijn", "has bold and delicious flavours. With no fillers, this cheese can be used for extra flavour in almost any recipe. This Grated Romano cheese, 8 oz, comes in an easy-to-use shaker.", null),
+(346989092397, "pine nuts", 2.70, 150, "gram", "Marco Deli", "Pine Nuts impart an earthy, slightly sweet flavour and a crunchy, yet almost buttery texture to savoury dishes or sweet preparations including batches of pesto, pasta, couscous, biscotti, desserts, and salads.", null),
+(869504681923, "dark chocolate", 1.85, 100, "gram", "Ricar", "Dark chocolate is an excellent product for any dessert or just to eat by itself.", null),
+(378563892894, "lemon", 1.00, 1, NULL, "Albert Heijn", "Like Lemons, Limes are also a versatile fruit excellent as garnish, in recipes, over fish, desserts and in drinks.", "lemon"),
+(586012350392, "butter", 0.99, 500, "gram", "Becel", "Butter is used for baking or greasing. It is solid when chilled and becomes liquid when heated.", null),
+(910948749832, "eggs", 2.40, 6, NULL, "Albert Heijn", "Eggs are used for baking or on its own. It is a product produced by chickens. It consist of two compartment, egg white and egg yolk.", null),
+(302917450593, "hazelnuts", 4.50, 80, "gram", "Albert Heijn", "Hazelnuts are a great way of getting in your healthy fats. Also an excellent product for baking.", null),
+(126742191239, "cacao powder", 2.99, 100, "gram", "Droste", "Cacao powder is made of cacao beans, it can be used to bake and to make delicious chocolate milk.", "droste"),
+(132449182373, "sugar", 0.89, 500, "gram", "Gilse", "Sugar is a multifunctional product.", "sugar"),
+(134560938624, "self-raising flour", 0.89, 500, "gram", "Koopmans", "Flour is used when baking many different things. Such as tortilla's, cakes and pies.", "raisingflour"),
+(234901235782, "red pepper", 0.99, 1, NULL, "Albert Heijn", "Red pepper has a fresh flavour, it can be eaten raw and cooked. If you want to cook the pepper you can put it in soup or wraps. but it is also delicious raw in a salad.", null),
+(569123467745, "sour cream", 0.59, 250, "gram", "Albert Heijn", "Sour cream is very versatile. You can use is to make your soup creamy or your pasta. But there are also a lot of other option.", null),
+(121349345024, "onions", 1.50, 1000, "gram", "Albert Heijn", "Using onions in a dish is a great way of adding flavour. So this big bag of onions will not take you long to finish if you love cooking, it is used in so many dishes.", "onions"),
+(573741293523, "iceberg lettuce", 0.99, 1, NULL, "Albert Heijn", "This lettuce is a great base for any salad or starter.", null),
+(123274394106, "lemon", 0.59, 1, NULL, "Albert Heijn", "Lemon is a citrus and used in many different ways. Is can be used in dressing, in a marinade, in desert but also on its own to make lemonade.", null),
+(123965419345, "tomatoes", 1.10, 500, "gram","Albert Heijn", "Tomatoes are a umami type of vegetable, thus having a great flavour. You can eat it in all sorts of ways, raw and cooked. Use your imagination.", "tomatoes"),
+(132485294754, "cucumber", 0.99, 1, NULL, "Albert Heijn", "Need something extra in you salad? Cucumber is an excellent vegetable for in the salad. It is also a lot of the times eaten on its own.", "cucumber"),
+(134236579063, "puff pastry", 1.79, 500, "gram", "Koopmans", "Puff pastry must be cooked in the oven and can be filled with sweet and savoury products. There are all sorts of recipes out there with original stuffing. So go wild.", "bladerdeeg"),
+(313459224506, "plain flour", 0.59, 1000, "gram", "De Molen", "Flour is used when baking many different things. Such as tortilla's, cakes and pies.", null),
+(678503425713, "mayonnaise", 0.99, 250, "gram", "Hellmann's", "Mayonnaise is a sauce that is used when eating certain types of dinner, but is can also be used as a base in salad our home made sauces.", null);
+ 
+
+--descriptions from https://www.walmart.com
+  
+
+--This part links most of the products to categories. The 10 categories are: fruits, vegetables, nuts, fats, gluten, dairy, italian, sweets, savoury and desserts.
+
+
+INSERT INTO Categories (productid, category) VALUES 
+(672057684020, "fruits"), --watermelon
+(672057684020, "snacks"), --watermelon
+(672057684020, "sweets"), --watermelon
+(672057684020, "desserts"), --watermelon
+(675890294857, "fats"), --olive oil
+(675890294857, "italian"), --olive oil
+(004802347892, "dairy"), --feta
+(004802347892, "savoury"), --feta
+(204928376269, "vegetables"), --cut carrots
+(204928376269, "snacks"), --cut carrots
+(204928376269, "savoury"), --cut carrots
+(378436780982, "dairy"), --milk
+(935434206823, "dairy"), --nutella
+(935434206823, "sweets"), --nutella
+(935434206823, "desserts"), --nutella
+(243689432079, "gluten"), --tortilla wraps
+(682392327978, "gluten"), --gnocchi
+(682392327978, "italian"), --gnocchi
+(682392327978, "savoury"), --gnocchi
+(356206034905, "vegetables"), --chopped spinach
+(234578376523, "dairy"), --ricotta
+(234578376523, "italian"), --ricotta
+(234578376523, "savoury"), --ricotta
+(326823097894, "dairy"), --parmesan cheese
+(326823097894, "italian"), --parmesan cheese
+(326823097894, "savoury"), --parmesan cheese
+(346989092397, "nuts"), --pine nuts
+(346989092397, "savoury"), --pine nuts
+(346989092397, "italian"), --pine nuts
+(869504681923, "dairy"), --dark chocolate
+(869504681923, "snacks"), --dark chocolate
+(869504681923, "sweets"), --dark chocolate
+(869504681923, "desserts"), --dark chocolate
+(378563892894, "fruits"), --lemon
+(586012350392, "dairy"), --butter
+(586012350392, "fats"), --butter
+(302917450593, "nuts"), --hazelnuts
+(302917450593, "snacks"), --hazelnuts
+(302917450593, "desserts"), --hazelnuts
+(132449182373, "sweets"), --sugar
+(132449182373, "desserts"), --sugar
+(134560938624, "gluten"), --self-raising flour
+(134560938624, "desserts"), --self-raising flour
+(234901235782, "vegetables"), --red pepper
+(234901235782, "savoury"), --red pepper
+(569123467745, "dairy"), --sour cream
+(569123467745, "savoury"), --sour cream
+(121349345024, "vegetables"), --onions
+(121349345024, "savoury"), --onions
+(573741293523, "vegetables"), --iceberg lettuce
+(123274394106, "fruit"), --lemon
+(123965419345, "vegetables"), --tomatoes
+(132485294754, "vegetables"), --cucumber
+(132485294754, "snacks"), --cucumber
+(132485294754, "savoury"), --cucumber
+(134236579063, "gluten"), --puff pastry
+(134236579063, "desserts"), --puff pastry
+(313459224506, "gluten"), --plain flour
+(313459224506, "desserts"), --plain flour
+(678503425713, "fats"), --mayonnaise 
+(678503425713, "savoury"); --mayonnaise 
+
+
+

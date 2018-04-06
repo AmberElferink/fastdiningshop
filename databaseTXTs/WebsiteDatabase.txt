@@ -1,0 +1,37 @@
+CREATE TABLE Persons (
+personid integer primary key autoincrement,
+firstname varchar(255) not null,
+surname varchar(255) not null,
+username varchar(255) not null unique,
+password varchar(255) not null,
+emailaddress varchar(255) not null
+);
+
+CREATE TABLE Products (
+barcode integer primary key,
+name varchar(255) not null,
+price float not null,
+quantity integer not null,
+unit varchar(255) default gram,
+manufacturer varchar(255) not null,
+description text,
+image text,
+CONSTRAINT CheckUnit CHECK(unit="gram" OR unit="ml"),
+CONSTRAINT CheckPrice CHECK(price > 0)
+);
+
+--categories of products, like diary or meat
+CREATE TABLE Categories (
+productid integer,
+category varchar(255),
+FOREIGN KEY(productid)REFERENCES Products(productid),
+CONSTRAINT Category PRIMARY KEY (productid, category)
+);
+
+CREATE TABLE Orders (
+shoplistid integer not null primary key autoincrement,
+productid integer not null,
+customerid integer not null,
+ FOREIGN KEY(customerid)REFERENCES Customers(personid),
+ FOREIGN KEY(productid)REFERENCES Products(productid)
+);

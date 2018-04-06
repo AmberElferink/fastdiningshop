@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "connect-sqlite3": "^0.9.10",
     "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "express": "~4.16.0",
@@ -14,7 +15,10 @@
     "express-validator": "^5.1.0",
     "hbs": "~4.0.1",
     "http-errors": "~1.6.2",
+    "jquery": "^3.1.1",
     "morgan": "^1.9.0",
-    "sqlite3": "https://github.com/mapbox/node-sqlite3/tarball/master"
+    "npm": "^5.8.0",
+    "session-file-store": "^1.2.0",
+    "sqlite3": "^4.0.0"
   }
 }

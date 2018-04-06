@@ -7,7 +7,7 @@ var expressHbs = require('express-handlebars');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var productRouter = require('./routes/products');
+var productsRouter = require('./routes/products');
 var startersRouter = require('./routes/starters');
 var maincoursesRouter = require('./routes/maincourses');
 var dessertsRouter = require('./routes/desserts');
@@ -20,6 +20,9 @@ var loginRouter = require('./routes/login');
 var loadPersonsRouter = require('./routes/loadPersons');
 var registerRouter = require('./routes/register');
 var addUserNameRouter = require('./routes/addUserName');
+
+//database communicatie bestanden
+var loadProducts = require('./routes/loadProducts');
 
 var app = express();
 
@@ -37,7 +40,7 @@ app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/products', productRouter);
+app.use('/products', productsRouter);
 app.use('/starters', startersRouter);
 app.use('/maincourses', maincoursesRouter);
 app.use('/desserts', dessertsRouter);
@@ -49,7 +52,7 @@ app.use('/register', registerRouter);
 
 
 app.use('/api/addUserName', addUserNameRouter);
-
+app.use('/api/products', loadProducts);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

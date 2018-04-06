@@ -28,17 +28,10 @@ FOREIGN KEY(productid)REFERENCES Products(productid),
 CONSTRAINT Category PRIMARY KEY (productid, category)
 );
 
-CREATE TABLE OrderProducts (
-shoplistid integer not null,
-productid integer not null,
-quantity integer not null CHECK (quantity > 0),
-CONSTRAINT Shop_Prod PRIMARY KEY (shoplistid, productid),
- FOREIGN KEY(shoplistid)REFERENCES Shoppinglists(shoplistid),
- FOREIGN KEY(productid)REFERENCES Products(productid)
-);
-
 CREATE TABLE Orders (
 shoplistid integer not null primary key autoincrement,
+productid integer not null,
 customerid integer not null,
  FOREIGN KEY(customerid)REFERENCES Customers(personid)
+ FOREIGN KEY(productid)REFERENCES Products(productid)
 );

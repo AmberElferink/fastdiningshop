@@ -21,7 +21,7 @@ function drawProducts(returnValues) {
     for(let i = 0; i<returnValues.length; i++)
     {
         product = new ProductBox(
-            returnValues[i].barcode, returnValues[i].name, returnValues[i].price, returnValues[i].quantity, returnValues[i].unit, returnValues[i].manufacturer, returnValues[i].description
+            returnValues[i].barcode, returnValues[i].name, returnValues[i].price, returnValues[i].quantity, returnValues[i].unit, returnValues[i].manufacturer, returnValues[i].description, returnValues[i].image
         );
         product.draw();
     }
@@ -29,7 +29,7 @@ function drawProducts(returnValues) {
 
 //classe die wordt gebruikt om productboxen aan te maken
 var ProductBox = class {
-    constructor(barcode, name, price, quantity, unit, manufacturer, description){
+    constructor(barcode, name, price, quantity, unit, manufacturer, description, image){
         this.draw = function () {
             var box = document.createElement("article");
             box.setAttribute("class", "productBox");
@@ -42,7 +42,7 @@ var ProductBox = class {
 
             var imageEl = document.createElement("img");
             imageEl.setAttribute("class", "productImage");
-            imageEl.setAttribute("src", "/images/products/" + "wortels" +".jpg")
+            imageEl.setAttribute("src", "/images/products/" + image +".jpg")
             box.appendChild(imageEl);
 
             var priceEl = document.createElement("p");

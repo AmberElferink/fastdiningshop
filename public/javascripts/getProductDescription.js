@@ -7,7 +7,7 @@ function getProperties (returnValues) {
     console.log(returnValues[i].barcode, returnValues[i].name, returnValues[i].price, returnValues[i].quantity + " " + returnValues[i].unit, returnValues[i].manufacturer, returnValues[i].description);
 
 }
-
+//hoi
 
 //zoekt producten in de database
 function searchProducts(callback, search) {

@@ -32,6 +32,6 @@ CREATE TABLE Orders (
 shoplistid integer not null primary key autoincrement,
 productid integer not null,
 customerid integer not null,
- FOREIGN KEY(customerid)REFERENCES Customers(personid)
+ FOREIGN KEY(customerid)REFERENCES Customers(personid),
  FOREIGN KEY(productid)REFERENCES Products(productid)
 );

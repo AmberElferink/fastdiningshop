@@ -40,7 +40,7 @@ app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false})
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/products', productRouter);
+app.use('/products', productsRouter);
 app.use('/starters', startersRouter);
 app.use('/maincourses', maincoursesRouter);
 app.use('/desserts', dessertsRouter);

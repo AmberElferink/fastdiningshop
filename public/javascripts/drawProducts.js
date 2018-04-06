@@ -21,7 +21,7 @@ function drawProducts(returnValues) {
     for(let i = 0; i<returnValues.length; i++)
     {
         product = new ProductBox(
-            returnValues[i].barcode, returnValues[i].name, returnValues[i].price, returnValues[i].quantity + " " + returnValues[i].unit, returnValues[i].manufacturer, returnValues[i].description
+            returnValues[i].barcode, returnValues[i].name, returnValues[i].price, returnValues[i].quantity, returnValues[i].unit, returnValues[i].manufacturer, returnValues[i].description, returnValues[i].image
         );
         product.draw();
     }
@@ -29,19 +29,53 @@ function drawProducts(returnValues) {
 
 //classe die wordt gebruikt om productboxen aan te maken
 var ProductBox = class {
-    constructor(barcode, name, price, volume, manufacturer, description){
+    constructor(barcode, name, price, quantity, unit, manufacturer, description, image){
         this.draw = function () {
             var box = document.createElement("article");
+            box.setAttribute("class", "productBox");
 
-
-            var link = document.createElement("a");
-            link.setAttribute("href", "/product/"+  barcode);
             var title = document.createElement("h1");
             title.setAttribute("class", "productName");
             var textnode = document.createTextNode(name);
             title.appendChild(textnode);
-            link.appendChild(title);
-            box.appendChild(link);
+            box.appendChild(title);
+
+
+                var imageEl = document.createElement("img");
+                imageEl.setAttribute("class", "productImage");
+            if(image != null)
+            {
+                imageEl.setAttribute("src", "/images/products/" + image +".jpg");
+                imageEl.setAttribute("alt", name);
+            }
+            else
+            {
+                imageEl.setAttribute("src", "/images/products/noimage.png");
+                imageEl.setAttribute("alt", "No Image Available");
+            }
+                box.appendChild(imageEl);
+
+
+
+            var priceEl = document.createElement("p");
+            priceEl.setAttribute("class", "price");
+            textnode = document.createTextNode("€ "+ price);
+            priceEl.appendChild(textnode);
+            box.appendChild(priceEl);
+
+            var volumeEl = document.createElement("p");
+            volumeEl.setAttribute("class", "volume");
+            if(unit != null)
+            {
+                textnode = document.createTextNode(quantity + " " + unit);
+            }
+            else
+            {
+                textnode = document.createTextNode(quantity);
+            }
+            volumeEl.appendChild(textnode);
+            box.appendChild(volumeEl);
+
 
             var manuf = document.createElement("p");
             manuf.setAttribute("class", "productManuf");
@@ -49,9 +83,15 @@ var ProductBox = class {
             manuf.appendChild(textnode);
             box.appendChild(manuf);
 
+            var descriptionEl = document.createElement("p");
+            descriptionEl.setAttribute("class", "description");
+            textnode = document.createTextNode(description);
+            descriptionEl.appendChild(textnode);
+            box.appendChild(descriptionEl);
+
             var button = document.createElement('button');
-            button.setAttribute("class", "addToCart");
-            button.appendChild(document.createTextNode("Add to cart"));
+            button.setAttribute("class", "buyProduct");
+            button.appendChild(document.createTextNode("Buy Product"));
             box.appendChild(button);
 
             $(".row")[0].appendChild(box);

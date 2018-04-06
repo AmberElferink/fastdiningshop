@@ -40,10 +40,22 @@ var ProductBox = class {
             title.appendChild(textnode);
             box.appendChild(title);
 
-            var imageEl = document.createElement("img");
-            imageEl.setAttribute("class", "productImage");
-            imageEl.setAttribute("src", "/images/products/" + image +".jpg")
-            box.appendChild(imageEl);
+
+                var imageEl = document.createElement("img");
+                imageEl.setAttribute("class", "productImage");
+            if(image != null)
+            {
+                imageEl.setAttribute("src", "/images/products/" + image +".jpg");
+                imageEl.setAttribute("alt", name);
+            }
+            else
+            {
+                imageEl.setAttribute("src", "/images/products/noimage.png");
+                imageEl.setAttribute("alt", "No Image Available");
+            }
+                box.appendChild(imageEl);
+
+
 
             var priceEl = document.createElement("p");
             priceEl.setAttribute("class", "price");

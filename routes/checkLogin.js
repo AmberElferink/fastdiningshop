@@ -3,12 +3,16 @@ var sqlite3 = require('sqlite3').verbose();
 var fs = require("fs");
 var file = __dirname + "/../ConnectionJs/fastdining.db";
 var exists = fs.existsSync(file);
-
+var app = express();
 var express = require('express');
 var router = express.Router();
 
 
-
+app.use(session({
+    secret: '2C44-4D44-WppQ38S',
+    resave: true,
+    saveUninitialized: true
+}));
 
 /* GET home page. */
 router.post('/', function (req, res) {

@@ -3,16 +3,26 @@ var sqlite3 = require('sqlite3').verbose();
 var fs = require("fs");
 var file = __dirname + "/../ConnectionJs/fastdining.db";
 var exists = fs.existsSync(file);
-
 var express = require('express');
 var router = express.Router();
 
 
 
 router.post('/', function (req, res) {
+    req.check('email', 'Invalid email address').isEmail();
+    req.check('password', 'Invalid password').isLength({min: 4}).equals(req.body.confirmPassword);
+
 addRegistryToDatabase(function(err, returnValues){
     var data = returnValues;
     res.send(data);
+    var errors = req.validationErrors();
+    if (errors){
+        req.session.error = errors;
+        req.session.succes = false;
+    } else {
+        req.session.succes = true;
+
+    }
 },req.body);
 });
 

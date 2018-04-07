@@ -46,6 +46,7 @@ function checkLoginWithDatabase(callback, loginData){
     db.serialize(function () {
 
             db.all("SELECT * FROM Persons WHERE Persons.username = ?", [loginData.username], function (err, row) {
+                console.log(row.length);
                 for(var i = 0; i < row.length; i++) {
 
                     console.log(row);
@@ -53,14 +54,14 @@ function checkLoginWithDatabase(callback, loginData){
                     if (err) {
                         return callback(err);
                     }
-                    console.log(row.password);
+                    console.log(row[i].password);
                     console.log(loginData.password);
                     if (row == undefined) {
                         //username not found in database
                         callback(undefined, false);
                         return;
                     }
-                    else if (row.password == loginData.password) {
+                    else if (row[i].password == loginData.password) {
                         callback(undefined, true);
                         return;
                     }

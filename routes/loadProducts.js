@@ -65,6 +65,7 @@ module.exports = router;
 
 
 
+
 function readProductsFromDatabase(callback, query){
     //creates a new database
     let db = new sqlite3.Database(file, (err) => {

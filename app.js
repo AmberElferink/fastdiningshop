@@ -23,6 +23,7 @@ var addUserNameRouter = require('./routes/addUserName');
 
 //database communicatie bestanden
 var loadProducts = require('./routes/loadProducts');
+var checkLoginRouter = require('./routes/checkLogin')
 
 var app = express();
 
@@ -52,6 +53,7 @@ app.use('/register', registerRouter);
 
 
 app.use('/api/addUserName', addUserNameRouter);
+app.use('/api/checkLogin', checkLoginRouter);
 app.use('/api/products', loadProducts);
 
 // catch 404 and forward to error handler

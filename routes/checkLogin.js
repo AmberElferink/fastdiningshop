@@ -3,15 +3,17 @@ var sqlite3 = require('sqlite3').verbose();
 var fs = require("fs");
 var file = __dirname + "/../ConnectionJs/fastdining.db";
 var exists = fs.existsSync(file);
-var app = express();
 var express = require('express');
 var router = express.Router();
-
+var app = express();
+session = require('express-session');
 
 app.use(session({
     secret: '2C44-4D44-WppQ38S',
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: false,
+    duration: 30 * 60 * 1000, //set interaction for half an hour on login
+    activeDuration: 5 * 60 * 1000, //extend session for 5 mins with interaction
 }));
 
 /* GET home page. */
@@ -20,7 +22,9 @@ router.post('/', function (req, res) {
     //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
     //alles binnen deze functie doet hij pas nadat de callback is uitgevoerd. Als je res.send(data);
     //dus onder de }); zet, dan krijg je undefined terug omdat de callback nog niet klaar was, toen hij was uitgevoerd
-    checkLoginWithDatabase(function(err, returnValues){
+    checkLoginWithDatabase(function(err, returnValues, username){
+        console.log(username);
+        req.session.user = username;
         var data = returnValues;
         res.send(data);
     },req.body);
@@ -60,7 +64,8 @@ function checkLoginWithDatabase(callback, loginData){
                         return;
                     }
                     else if (row[i].password == loginData.password) {
-                        callback(undefined, true);
+
+                        callback(undefined, true, loginData.username);
                         return;
                     }
                     else {

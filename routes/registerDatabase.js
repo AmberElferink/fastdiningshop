@@ -40,13 +40,35 @@ function addRegistryToDatabase(callback, registerData) {
     db.serialize(function () {
 
         // insert one row into the langs table
-        db.run(`INSERT INTO Persons(firstname, surname, username, password, emailadress) VALUES(?, ?, ?, ?, ?)`, [registerData.firstname, registerData.surname, registerData.username, registerData.password, registerData.email], function (err) {
+        db.run(`INSERT INTO Persons(firstname, surname, username, password, emailaddress) VALUES(?, ?, ?, ?, ?)`, [registerData.firstname, registerData.surname, registerData.username, registerData.password, registerData.email], function (err) {
             if (err) {
                 return console.log(err.message);
             }
             // get the last insert id
             console.log(`A row has been inserted with rowid ${this.lastID}`);
         });
+    });
+
+    db.all("SELECT * FROM Persons", function (err, row) {
+        for(var i = 0; i < row.length; i++) {
+            if (err) {
+                return callback(err);
+            }
+            if (row == undefined) {
+                //username not found in database
+                callback(undefined, false);
+                return;
+            }
+            else if (row[i].password == registerData.password) {
+                callback(undefined, true);
+                return;
+            }
+            else {
+                //password not correct
+                callback(undefined, false);
+                return;
+            }
+        }
         //username not found in database row.length = 0
         callback(undefined, false);
         return;

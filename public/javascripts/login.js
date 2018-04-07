@@ -28,11 +28,9 @@
 function validate() {
     var un = $('#username').val();
     var pw = $('#password').val();
-    var valid = false;
 
     postLogin(function (returnValue) {
-        console.log(returnValue);
-        //giveAlert(returnValue);
+        giveAlert(returnValue);
     }, un, pw);
 
     /*var usernameArray = ["Vlad", "bob"];
@@ -47,7 +45,6 @@ function validate() {
 }
 
 function postLogin(callback, un, pw) {
-    console.log(un,pw)
     $.ajax({
         type: 'POST',
         url: '/api/checkLogin',
@@ -71,5 +68,9 @@ function postLogin(callback, un, pw) {
 function giveAlert(returnValue) {
     if (returnValue == true) {
         alert("Login was successful");
+    }
+    else
+    {
+        alert("Username or password is incorrect");
     }
 }

@@ -46,16 +46,10 @@ function checkLoginWithDatabase(callback, loginData){
     db.serialize(function () {
 
             db.all("SELECT * FROM Persons WHERE Persons.username = ?", [loginData.username], function (err, row) {
-                console.log(row.length);
                 for(var i = 0; i < row.length; i++) {
-
-                    console.log(row);
-
                     if (err) {
                         return callback(err);
                     }
-                    console.log(row[i].password);
-                    console.log(loginData.password);
                     if (row == undefined) {
                         //username not found in database
                         callback(undefined, false);

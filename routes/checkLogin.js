@@ -17,7 +17,7 @@ app.use(session({
 }));
 
 /* GET home page. */
-router.post('/', function (req, res) {
+router.post('/login', function (req, res) {
 
     //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
     //alles binnen deze functie doet hij pas nadat de callback is uitgevoerd. Als je res.send(data);
@@ -28,6 +28,12 @@ router.post('/', function (req, res) {
         var data = returnValues;
         res.send(data);
     },req.body);
+});
+
+router.get('/logout', function (req, res) {
+    console.log("I am logging out");
+    req.session.destroy();
+    res.send("logout success!");
 });
 
 module.exports = router;

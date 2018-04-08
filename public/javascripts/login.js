@@ -47,7 +47,7 @@ function validate() {
 function postLogin(callback, un, pw) {
     $.ajax({
         type: 'POST',
-        url: '/api/checkLogin',
+        url: '/api/checkLogin/login',
         dataType: 'json',
         data: {
             "username": un,

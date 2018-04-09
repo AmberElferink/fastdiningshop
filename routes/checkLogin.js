@@ -16,6 +16,21 @@ app.use(session({
     activeDuration: 5 * 60 * 1000, //extend session for 5 mins with interaction
 }));
 
+/*If a get or post loads a page, for instance /myprofile, it wil look if the person is authorised to see it using this.
+ */
+var auth = function (req, res, next, user) {
+    if(req.session && req.session.user === user)
+    {
+        return next();
+    }
+    else
+    {
+        return res.sendStatus(401);
+    }
+};
+
+
+
 /* GET home page. */
 router.post('/login', function (req, res) {
 
@@ -34,6 +49,11 @@ router.get('/logout', function (req, res) {
     console.log("I am logging out");
     req.session.destroy();
     res.send("logout success!");
+});
+
+router.get('/profile', auth, function (req, res) {
+    user = req.query;
+    res.send("You can only see this after you've logged in.")
 });
 
 module.exports = router;

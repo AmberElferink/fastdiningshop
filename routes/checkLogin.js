@@ -39,9 +39,17 @@ router.post('/login', function (req, res) {
     //dus onder de }); zet, dan krijg je undefined terug omdat de callback nog niet klaar was, toen hij was uitgevoerd
     checkLoginWithDatabase(function(err, returnValues, username){
         console.log(username);
-        req.session.user = username;
-        var data = returnValues;
-        res.send(data);
+        if(returnValues == true)
+        {
+            req.session.user = username;
+            res.send(returnValues);
+        }
+        else
+        {
+            res.send(returnValues);
+        }
+
+
     },req.body);
 });
 

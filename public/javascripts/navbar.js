@@ -8,7 +8,8 @@ $('#logout').click(function () {
         .done(function (data) {
             //deze done functie logt het naar de javascript console en print het op de pagina als txt
             //console.log('GET response:', JSON.stringify(data, "", 2));
-            console.log(data);
+            window.location.replace("/");
+            alert(data); //gives "logout was succesful" if user was logged in, otherwise nothing.
         })
         //als het niet goed is gegaan, doet hij de fail hieronder
         .fail(function (jqXHR, textStatus, err) {

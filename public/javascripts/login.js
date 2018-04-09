@@ -66,8 +66,9 @@ function postLogin(callback, un, pw) {
 }
 
 function giveAlert(returnValue) {
-    if (returnValue == true) {
-        alert("Login was successful");
+    if (returnValue.boolLoginCorrect == true) {
+        //since username must be unique for the database, it can be used for the url
+        window.location.replace("/profile?" + returnValue.currentuser);
     }
     else
     {

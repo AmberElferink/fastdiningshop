@@ -26,6 +26,8 @@ var loadProducts = require('./routes/loadProducts');
 var checkLoginRouter = require('./routes/checkLogin');
 var registerUserRouter = require('./routes/registerDatabase');
 
+var profileRouter = require('./routes/profile');
+
 var app = express();
 
 // view engine setup
@@ -56,7 +58,9 @@ app.use('/register', registerRouter);
 app.use('/api/addUserName', addUserNameRouter);
 app.use('/api/checkLogin', checkLoginRouter);
 app.use('/api/products', loadProducts);
-app.use('/api/register', registerUserRouter)
+app.use('/api/register', registerUserRouter);
+
+app.use('/profile', profileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -9,6 +9,7 @@ var app = express();
 session = require('express-session');
 
 app.use(session({
+    path: '/profile',
     secret: '2C44-4D44-WppQ38S',
     resave: true,
     saveUninitialized: false,
@@ -18,16 +19,7 @@ app.use(session({
 
 /*If a get or post loads a page, for instance /myprofile, it wil look if the person is authorised to see it using this.
  */
-var auth = function (req, res, next, user) {
-    if(req.session && req.session.user === user)
-    {
-        return next();
-    }
-    else
-    {
-        return res.sendStatus(401);
-    }
-};
+
 
 
 
@@ -38,12 +30,16 @@ router.post('/login', function (req, res) {
     //alles binnen deze functie doet hij pas nadat de callback is uitgevoerd. Als je res.send(data);
     //dus onder de }); zet, dan krijg je undefined terug omdat de callback nog niet klaar was, toen hij was uitgevoerd
     checkLoginWithDatabase(function(err, returnValues, username){
-        console.log(username);
+        //login is correct
         if(returnValues == true)
         {
+            req.session.username
             req.session.user = username;
-            res.send(returnValues);
+            res.send(
+                {"boolLoginCorrect": returnValues, "currentuser": username}
+            );
         }
+        //login is not correct
         else
         {
             res.send(returnValues);
@@ -59,10 +55,8 @@ router.get('/logout', function (req, res) {
     res.send("logout success!");
 });
 
-router.get('/profile', auth, function (req, res) {
-    user = req.query;
-    res.send("You can only see this after you've logged in.")
-});
+
+
 
 module.exports = router;
 

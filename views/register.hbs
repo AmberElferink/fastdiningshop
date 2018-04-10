@@ -16,22 +16,22 @@
             </ul>
         </section>
     {{/if}}
-    <form name="login" action="/api/register" method="post">
+    <section> <!-- form cannot be used since it will place the inserted values in the link. Using action will send user to the link. Instead it is handled with ajax in javascripts/register.js-->
         <div class="input">
             <label>First Name</label>
-            <input type="text" id="firstname" name="firstname" placeholder="your first name">
+            <input type="text" id="firstname" placeholder="your first name">
         </div>
         <div class="input">
             <label>SurName</label>
-            <input type="text" id="surname" name="surname" placeholder="your surname">
+            <input type="text" id="surname" placeholder="your surname">
         </div>
         <div class="input">
             <label>Email</label>
-            <input type="text" id="email" name="email" placeholder="your email address">
+            <input type="text" id="email" placeholder="your email address">
         </div>
         <div class="input">
             <label>Username</label>
-            <input type="text" id="username" name="username" placeholder="your login name">
+            <input type="text" id="username" placeholder="your login name">
         </div>
         <div class="input">
             <label>Password</label>
@@ -42,6 +42,6 @@
             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="confirm your password">
         </div>
 
-        <button type="submit" >Sign up</button>
-    </form>
+        <button onclick="register()">Sign up</button>
+    </section>
 {{/if}}

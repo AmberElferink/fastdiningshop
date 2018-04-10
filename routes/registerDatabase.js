@@ -50,16 +50,18 @@ function addRegistryToDatabase(callback, registerData) {
     db.serialize(function () {
 
         // insert one row into the langs table
-        db.run(`INSERT INTO Persons(firstname, surname, username, password, emailaddress) VALUES(?, ?, ?, ?, ?)`, [registerData.firstname, registerData.surname, registerData.username, registerData.password, registerData.email], function (err) {
+        db.run(`INSERT INTO Persons(firstname, surname, username, password, emailaddress) VALUES(?, ?, ?, ?, ?)`, [registerData.firstname, registerData.surname, registerData.username, registerData.password, registerData.emailaddress], function (err) {
             if (err) {
                 return console.log(err.message);
             }
             // get the last insert id
             console.log(`A row has been inserted with rowid ${this.lastID}`);
+            console.log(registerData);
         });
     });
 
     db.all("SELECT * FROM Persons", function (err, row) {
+        console.log(row);
         for(var i = 0; i < row.length; i++) {
             if (err) {
                 return callback(err);

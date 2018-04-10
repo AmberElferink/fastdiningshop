@@ -3,24 +3,60 @@ var sqlite3 = require('sqlite3').verbose();
 var fs = require("fs");
 var file = __dirname + "/../ConnectionJs/fastdining.db";
 var exists = fs.existsSync(file);
-
 var express = require('express');
 var router = express.Router();
+var app = express();
+session = require('express-session');
+
+app.use(session({
+    path: '/profile',
+    secret: '2C44-4D44-WppQ38S',
+    resave: true,
+    saveUninitialized: false,
+    duration: 30 * 60 * 1000, //set interaction for half an hour on login
+    activeDuration: 5 * 60 * 1000, //extend session for 5 mins with interaction
+}));
+
+/*If a get or post loads a page, for instance /myprofile, it wil look if the person is authorised to see it using this.
+ */
 
 
 
 
 /* GET home page. */
-router.post('/', function (req, res) {
+router.post('/login', function (req, res) {
 
     //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
     //alles binnen deze functie doet hij pas nadat de callback is uitgevoerd. Als je res.send(data);
     //dus onder de }); zet, dan krijg je undefined terug omdat de callback nog niet klaar was, toen hij was uitgevoerd
-    checkLoginWithDatabase(function(err, returnValues){
-        var data = returnValues;
-        res.send(data);
+    checkLoginWithDatabase(function(err, returnValues, username){
+        //login is correct
+        if(returnValues == true)
+        {
+            req.session.username
+            req.session.user = username;
+            res.send(
+                {"boolLoginCorrect": returnValues, "currentuser": username}
+            );
+        }
+        //login is not correct
+        else
+        {
+            res.send(returnValues);
+        }
+
+
     },req.body);
 });
+
+router.get('/logout', function (req, res) {
+    console.log("I am logging out");
+    req.session.destroy();
+    res.send("logout success!");
+});
+
+
+
 
 module.exports = router;
 
@@ -56,7 +92,8 @@ function checkLoginWithDatabase(callback, loginData){
                         return;
                     }
                     else if (row[i].password == loginData.password) {
-                        callback(undefined, true);
+
+                        callback(undefined, true, loginData.username);
                         return;
                     }
                     else {

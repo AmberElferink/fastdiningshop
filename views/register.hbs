@@ -16,7 +16,7 @@
             </ul>
         </section>
     {{/if}}
-    <form name="login" action="/register/addUsername"  method="post">
+    <form name="login" action="/api/register" method="post">
         <div class="input">
             <label>First Name</label>
             <input type="text" id="firstname" name="firstname" placeholder="your first name">
@@ -42,6 +42,6 @@
             <input type="password" id="confirmPassword" name="confirmPassword" placeholder="confirm your password">
         </div>
 
-        <button type="submit" onclick="validate()">Sign up</button>
+        <button type="submit" >Sign up</button>
     </form>
 {{/if}}

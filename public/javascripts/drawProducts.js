@@ -71,7 +71,7 @@ var ProductBox = class {
             }
             else
             {
-                textnode = document.createTextNode(quantity);
+                textnode = document.createTextNode("amount: " + quantity);
             }
             volumeEl.appendChild(textnode);
             box.appendChild(volumeEl);

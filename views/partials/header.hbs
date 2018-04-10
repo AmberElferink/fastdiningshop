@@ -1,5 +1,5 @@
 <header>
-    <img src="images/website-header.png" alt="layout of ingedrients">
+    <img src="/images/website-header.png" alt="layout of ingedrients">
 </header>
 
 <nav>
@@ -19,17 +19,18 @@
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> User<span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="#">My Profile</a></li>
+                    <li><a href="/login">My Profile</a></li>
                     <li><a href="#">Order History</a></li>
                     <li><a href="#"></a>Blabla</li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="#">Log out</a></li>
+                    <li><a id="logout">Log out</a></li>
                 </ul>
             </li>
         </ul>
     </div>
 </nav>
-
+<script src="/libraries/jquery.min.js"></script>
+<script type=text/javascript src="/javascripts/navbar.js"></script>
 <!--
 <nav class="navbar navbar-default">
     <div class="container-fluid">

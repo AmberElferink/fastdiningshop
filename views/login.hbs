@@ -16,7 +16,7 @@
         </ul>
     </section>
     {{/if}} --->
-<form name="login" action="/login/submit"  method="post">
+<section name="login">
     <div class="input">
         <label>Username</label>
         <input type="text" id="username" name="username" placeholder="your login name">
@@ -34,6 +34,8 @@
         <input type="password" id="confirmPassword" name="confirmPassword" placeholder="enter your password again">
     </div> --->
 
-    <button type="submit" onclick="validate()">Sign up</button>
-</form>
+    <button onclick="validate()">Log in</button>
+    <br>
+    <a href="/register">Or click here to register</a>
+</section>
  <!--- {{/if}} --->

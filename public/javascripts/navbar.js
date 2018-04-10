@@ -1,3 +1,4 @@
+console.log("navbar javascript loaded");
 $('#logout').click(function () {
     $.ajax({
         type: 'GET',

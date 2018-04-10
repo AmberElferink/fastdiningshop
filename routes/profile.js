@@ -15,7 +15,7 @@ router.get('/:username', function(req, res, next) {
 });
 //authorises if the user may access the page
 var auth = function (req, res, next) {
-    if(req.session && req.session.user === req.query)
+    if(req.session && req.session.user === req.param('username'))
     {
         return next();
     }

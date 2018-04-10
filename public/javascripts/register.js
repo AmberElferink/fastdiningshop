@@ -1,27 +1,25 @@
 
-    function get(product) {
+    function register() {
         $.ajax({
             type: 'POST',
-            url: '/api/addusername=',
+            url: '/api/register',
             dataType: 'json',
             data: {
-                "firstname": $('#firstname').value,
-                "surname": $('#surname').value,
-                "emailaddress": $('#email').value,
-                "username": $('#username').value,
-                "password": $('#password').value
+                "firstname": $('#firstname').val(),
+                "surname": $('#surname').val(),
+                "emailaddress": $('#email').val(),
+                "username": $('#username').val(),
+                "password": $('#password').val()
             }
         })
-
-        console.log("doet dit het?")
-
         //als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
         //als het goed is gegaan, callt hij de .done hieronder.
                 .done(function (data) {
                     console.log(data);
-                    //deze done functie logt het naar de javascript console en print het op de pagina als txt
+                    //logs if username already existed (false is good)
                     console.log('GET response:', JSON.stringify(data, "", 2));
                     $('#getResponse').html(JSON.stringify(data, "", 2));
+                    alert("register succesful");
                 })
                 //als het niet goed is gegaan, doet hij de fail hieronder
                 .fail(function (jqXHR, textStatus, err) {

@@ -42,25 +42,25 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/products', productsRouter);
-app.use('/starters', startersRouter);
-app.use('/maincourses', maincoursesRouter);
-app.use('/desserts', dessertsRouter);
-app.use('/about', aboutRouter);
-app.use('/recap', recapRouter);
-app.use('/plot', plotRouter);
-app.use('/login', loginRouter);
-app.use('/register', registerRouter);
+app.use('./', indexRouter);
+app.use('./users', usersRouter);
+app.use('./products', productsRouter);
+app.use('./starters', startersRouter);
+app.use('./maincourses', maincoursesRouter);
+app.use('./desserts', dessertsRouter);
+app.use('./about', aboutRouter);
+app.use('./recap', recapRouter);
+app.use('./plot', plotRouter);
+app.use('./login', loginRouter);
+app.use('./register', registerRouter);
 
 
-app.use('/api/addUserName', addUserNameRouter);
-app.use('/api/checkLogin', checkLoginRouter);
-app.use('/api/products', loadProducts);
-app.use('/api/register', registerUserRouter);
+app.use('./api/addUserName', addUserNameRouter);
+app.use('./api/checkLogin', checkLoginRouter);
+app.use('./api/products', loadProducts);
+app.use('./api/register', registerUserRouter);
 
-app.use('/profile', profileRouter);
+app.use('./profile', profileRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

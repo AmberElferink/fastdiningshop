@@ -39,7 +39,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use("/", express.static('./public'));
 app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
 
 app.use('/', indexRouter);

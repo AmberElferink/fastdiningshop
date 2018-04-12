@@ -17,7 +17,7 @@
                 .done(function (data) {
                     console.log(data);
                     alert("register succesful, please log in to continue");
-                    window.location.replace("/login");
+                    window.location.replace("./login");
                 })
                 //als het niet goed is gegaan, doet hij de fail hieronder
                 .fail(function (jqXHR, textStatus, err) {

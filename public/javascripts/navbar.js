@@ -2,7 +2,7 @@ console.log("navbar javascript loaded");
 $('#logout').click(function () {
     $.ajax({
         type: 'GET',
-        url: '/api/checkLogin/logout',
+        url: './api/checkLogin/logout',
         dataType: 'text',
     })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
     //als het goed is gegaan, callt hij de .done hieronder.

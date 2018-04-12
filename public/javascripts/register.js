@@ -2,7 +2,7 @@
     function register() {
         $.ajax({
             type: 'POST',
-            url: '/api/register',
+            url: './api/register',
             dataType: 'json',
             data: {
                 "firstname": $('#firstname').val(),

@@ -15,7 +15,7 @@ router.get('/:username',auth, function(req, res, next) {
 });*/
 //authorises if the user may access the page
 var auth = function (req, res, next) {
-    if(req.session && req.session.user === req.param('username'))
+    if(req.session && req.session.user === req.query.user)
     {
         return next();
     }
@@ -27,7 +27,7 @@ var auth = function (req, res, next) {
 
 
 
-router.get('/:username', auth, function (req, res) {
+router.get('/', auth, function (req, res) {
     console.log(req.query);
     res.render('profile', {title: 'Profile Fast Dining', layout: 'layoutProfile'});
 });

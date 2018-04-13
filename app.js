@@ -20,12 +20,14 @@ var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
 var addUserNameRouter = require('./routes/addUserName');
 var profileRouter = require('./routes/profile');
+var historyRouter = require('./routes/history');
 
 //database communicatie bestanden
 var loadProducts = require('./routes/loadProducts');
 var checkLoginRouter = require('./routes/checkLogin');
 var registerUserRouter = require('./routes/registerDatabase');
 var editprofileRouter = require('./routes/profileDatabase');
+var historyDatabaseRouter = require('./routes/historyDatabase');
 
 var app = express();
 
@@ -52,6 +54,7 @@ app.use('/recap', recapRouter);
 app.use('/plot', plotRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/history', historyRouter);
 
 
 app.use('/api/addUserName', addUserNameRouter);
@@ -59,7 +62,7 @@ app.use('/api/checkLogin', checkLoginRouter);
 app.use('/api/products', loadProducts);
 app.use('/api/register', registerUserRouter);
 app.use('/api/profile', editprofileRouter);
-
+app.use('/api/history', historyDatabaseRouter);
 app.use('/profile', profileRouter);
 
 // catch 404 and forward to error handler

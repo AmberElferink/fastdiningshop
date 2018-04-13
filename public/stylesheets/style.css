@@ -143,6 +143,7 @@ aside.sidenav {
   right: 0;
   background-color: grey;
   overflow-x: hidden;
+    z-index: 100;
 }
 
 
@@ -155,7 +156,7 @@ aside.sidenav {
   overflow-y: auto;
 }
 
-.shoppinglist {
+.categories{
   height: 50%;
   width: 340px;
   float: right;
@@ -356,4 +357,22 @@ h1.sidenav {
     border-radius: 5px;
     width: 500px;
     padding: 15px;
+}
+
+.productImage {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 350px;
+    width: auto;
+}
+
+.category {
+
+}
+
+.categoryinputs
+{
+    list-style-type: none;
+    padding: 50px;
 }

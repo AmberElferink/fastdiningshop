@@ -45,12 +45,12 @@ var ProductBox = class {
                 imageEl.setAttribute("class", "productImage");
             if(image != null)
             {
-                imageEl.setAttribute("src", "/images/products/" + image +".jpg");
+                imageEl.setAttribute("src", "images/products/" + image +".jpg");
                 imageEl.setAttribute("alt", name);
             }
             else
             {
-                imageEl.setAttribute("src", "/images/products/noimage.png");
+                imageEl.setAttribute("src", "images/products/noimage.png");
                 imageEl.setAttribute("alt", "No Image Available");
             }
                 box.appendChild(imageEl);
@@ -108,7 +108,7 @@ function searchProducts(callback, search) {
     }
     $.ajax({
         type: 'GET',
-        url: '/api/products'+search,
+        url: './api/products'+search,
         dataType: 'json',
     })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
     //als het goed is gegaan, callt hij de .done hieronder.

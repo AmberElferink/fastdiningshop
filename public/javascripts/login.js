@@ -47,7 +47,7 @@ function validate() {
 function postLogin(callback, un, pw) {
     $.ajax({
         type: 'POST',
-        url: '/api/checkLogin/login',
+        url: './api/checkLogin/login',
         dataType: 'json',
         data: {
             "username": un,
@@ -68,7 +68,7 @@ function postLogin(callback, un, pw) {
 function giveAlert(returnValue) {
     if (returnValue.boolLoginCorrect == true) {
         //since username must be unique for the database, it can be used for the url
-        window.location.replace("/profile/" + returnValue.currentuser);
+        window.location.replace("./profile?user=" + returnValue.currentuser);
     }
     else
     {

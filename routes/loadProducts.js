@@ -90,6 +90,7 @@ function readProductsFromDatabase(callback, query){
         else
         {
             console.log(query.products); //query.products is wat ingetypt is, dus waar de query op moet werken
+            console.log(query.category);
             db.all("SELECT * FROM Products WHERE Products.name LIKE ? ", ['%' + query.products + '%'], function (err, rows) {
                 if (err) {
                     return callback(err);

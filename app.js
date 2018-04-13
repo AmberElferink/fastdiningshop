@@ -62,6 +62,8 @@ app.use('/api/register', registerUserRouter);
 
 app.use('/profile', profileRouter);
 
+// /profile?user=Dentist
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));

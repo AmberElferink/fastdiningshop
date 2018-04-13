@@ -27,6 +27,7 @@ $('.category').click(function (e) {
     }
     console.log(activeCategories);
     console.log(activeCategories.join("&category="));
+    categorystring=activeCategories.join("&category=");
     for(let i = 0; i < activeCategories.length; i++)
     {
 

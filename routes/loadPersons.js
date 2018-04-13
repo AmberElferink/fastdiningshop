@@ -42,6 +42,7 @@ function readPersonsFromDatabase(callback, query){
                 callback(undefined, rows);
             });
         }
+
         else
         {
             console.log(query.products); //query.products is wat ingetypt is, dus waar de query op moet werken

@@ -11,28 +11,23 @@ searchProducts(function (returnValues) {
 
 //terwijl je typt updaten de producten om te voldoen aan wat je zoekt
 $("#productSearch").keyup(function (e) {
-    console.log(this.value);
     $("#productBox").empty(); //verwijdert alle producten voor het zoeken
 
     searchProducts(function (returnValues) {
         drawProducts(returnValues);
     }, "?products=" + this.value + categorystring);
+    console.log(document.getElementById("productSearch").value);
 });
 
+console.log($('.category:checked').attr("id"));
+
 $('.category').click(function (e) {
-    var clickedCat = $(this).attr('id');
-    //if the clicked category is not in the active categories yet, add it.
-    if(activeCategories.indexOf(clickedCat) == -1) {
-        activeCategories.push(clickedCat);
-    }
-    console.log(activeCategories);
-    categorystring= "&category=" + activeCategories.join("&category=");
-    console.log(categorystring);
-    for(let i = 0; i < activeCategories.length; i++)
-    {
-
-    }
-
+        //if the clicked category is not in the active categories yet, add it.
+        categorystring = "&category=" + $('.category:checked').attr("id");
+        console.log(categorystring);
+        searchProducts(function (returnValues) {
+            drawProducts(returnValues);
+        }, "?products=" + document.getElementById("productSearch").value + categorystring);
 
 });
 

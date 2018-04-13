@@ -3,32 +3,28 @@
 var activeCategories = [];
 var categorystring;
 
-searchProducts(function (returnValues) {
-    drawProducts(returnValues);
-});
+getProducts();
 
-
-
-//terwijl je typt updaten de producten om te voldoen aan wat je zoekt
-$("#productSearch").keyup(function (e) {
+function getProducts(){
     $("#productBox").empty(); //verwijdert alle producten voor het zoeken
 
     searchProducts(function (returnValues) {
         drawProducts(returnValues);
-    }, "?products=" + this.value + categorystring);
+    }, "?products=" + document.getElementById("productSearch").value + "&category=" + $('.category:checked').attr("id"));
     console.log(document.getElementById("productSearch").value);
+    console.log($('.category:checked').attr("id"));
+
+}
+
+//terwijl je typt updaten de producten om te voldoen aan wat je zoekt
+$("#productSearch").keyup(function (e) {
+getProducts();
 });
 
-console.log($('.category:checked').attr("id"));
+
 
 $('.category').click(function (e) {
-        //if the clicked category is not in the active categories yet, add it.
-        categorystring = "&category=" + $('.category:checked').attr("id");
-        console.log(categorystring);
-        searchProducts(function (returnValues) {
-            drawProducts(returnValues);
-        }, "?products=" + document.getElementById("productSearch").value + categorystring);
-
+getProducts();
 });
 
 

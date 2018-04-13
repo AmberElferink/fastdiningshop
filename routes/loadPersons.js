@@ -66,3 +66,5 @@ function readPersonsFromDatabase(callback, query){
         }
         console.log('Close the database connection.');
     });}
+
+    //db.all("SELECT * FROM Products WHERE Products.name LIKE ? ", ['%' + query.products + '%'], function (err, rows) {

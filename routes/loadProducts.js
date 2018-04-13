@@ -91,10 +91,12 @@ function readProductsFromDatabase(callback, query){
         {
             console.log(query.products); //query.products is wat ingetypt is, dus waar de query op moet werken
             console.log(query.category);
-            db.all("SELECT * FROM Products WHERE Products.name LIKE ? ", ['%' + query.products + '%'], function (err, rows) {
+
+            db.all("SELECT barcode, name, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=? AND name LIKE ?", [query.category, '%' + query.products + '%'], function (err, rows) {
                 if (err) {
                     return callback(err);
                 }
+                console.log(rows);
                 //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
                 //en dan zijn de returnValues dus undefined
                 callback(undefined, rows);

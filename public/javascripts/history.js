@@ -7,11 +7,11 @@ OrderHistory(function(returnValues){
 
 //tekent de productboxen
 function drawOrders(returnValues) {
-    console.log("Helpppp");
-    
+
+
     for(let i = 0; i<returnValues.length; i++)
     {
-        console.log("Helpppp");
+
 
         order = new OrderBox(
             returnValues[i].name, returnValues[i].image, returnValues[i].orderid
@@ -27,7 +27,6 @@ var OrderBox = class{
 
         this.draw = function () {
 
-            console.log("Hallooo wereld ");
 
 
             var box = document.createElement("article");
@@ -61,7 +60,8 @@ var OrderBox = class{
             }
             box.appendChild(imageEl);
 
-            $(".row")[0].appendChild(box);
+            document.getElementById("orderlist").appendChild(box);
+
     }
 
 }}
@@ -77,7 +77,7 @@ function OrderHistory(callback, user) {
     })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
     //als het goed is gegaan, callt hij de .done hieronder.
         .done(function (data) {
-            console.log("Done");
+            console.log(data);
             //deze done functie logt het naar de javascript console en print het op de pagina als txt
             //console.log('GET response:', JSON.stringify(data, "", 2));
             callback(data);

@@ -38,10 +38,13 @@ function readOrdersFromDatabase(callback, query){
         }
         else
         {
-            db.all("SELECT * FROM Orders", [], function (err, rows) {
+
+            db.all("SELECT * FROM(SELECT * FROM(SELECT username AS orderuser, * FROM Products LEFT OUTER JOIN Orders ON Orders.productid = Products.barcode) LEFT OUTER JOIN Persons ON Persons.username = orderuser) WHERE username = ? ", [query.user], function (err, rows) {
                 if (err) {
                     return callback(err);
                 }
+
+               
                 //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
                 //en dan zijn de returnValues dus undefined
                 callback(undefined, rows);

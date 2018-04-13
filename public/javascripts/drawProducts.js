@@ -6,11 +6,15 @@ var categorystring;
 getProducts();
 
 function getProducts(){
+    var products = document.getElementById("productSearch").value;
     $("#productBox").empty(); //verwijdert alle producten voor het zoeken
-
+    if(products == "")
+    {
+        products = "all";
+    }
     searchProducts(function (returnValues) {
         drawProducts(returnValues);
-    }, "?products=" + document.getElementById("productSearch").value + "&category=" + $('.category:checked').attr("id"));
+    }, "?products=" + products + "&category=" + $('.category:checked').attr("id"));
     console.log(document.getElementById("productSearch").value);
     console.log($('.category:checked').attr("id"));
 

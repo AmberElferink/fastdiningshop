@@ -77,32 +77,63 @@ function readProductsFromDatabase(callback, query){
     });
     db.serialize(function () {
         console.log(query);
-        if(query.products == undefined) {
-            db.all("SELECT * FROM Products", [], function (err, rows) {
-                if (err) {
-                    return callback(err);
-                }
-                //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
-                //en dan zijn de returnValues dus undefined
-                callback(undefined, rows);
-            });
-        }
-        else
-        {
-            console.log(query.products); //query.products is wat ingetypt is, dus waar de query op moet werken
-            console.log(query.category);
+        console.log(query.products); //query.products is wat ingetypt is, dus waar de query op moet werken
+        console.log(query.category);
 
-            db.all("SELECT barcode, name, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=? AND WHERE name LIKE ?", [query.category, '%' + query.products + '%'], function (err, rows) {
-                if (err) {
-                    return callback(err);
-                }
-                console.log(rows);
-                //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
-                //en dan zijn de returnValues dus undefined
-                callback(undefined, rows);
-            });
+        if(query.category === "all") {
+            if (query.products === "all") {
+                console.log("neither selected");
+                db.all("SELECT * FROM Products", [], function (err, rows) {
+                    console.log(rows);
+                    if (err) {
+                        return callback(err);
+                    }
+                    //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
+                    //en dan zijn de returnValues dus undefined
+                    callback(undefined, rows);
+                });
+            }
+            else if (query.products !== "all"){
+                console.log("only products selected");
+                db.all("SELECT * FROM Products WHERE name LIKE ?", ['%' + query.products + '%'], function (err, rows) {
+                    console.log(rows);
+                    if (err) {
+                        return callback(err);
+                    }
+                    //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
+                    //en dan zijn de returnValues dus undefined
+                    callback(undefined, rows);
+                });
+            }
         }
+        else if(query.category !== "all"){
+            if(query.products === "all")
+            {
+                console.log("only category selected");
+                db.all("SELECT barcode, name, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=?", [query.category], function (err, rows) {
+                    console.log(rows);
+                    if (err) {
+                        return callback(err);
+                    }
+                    //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
+                    //en dan zijn de returnValues dus undefined
+                    callback(undefined, rows);
+                });
+            }
+            else if(query.products !== "all") {
+                console.log("both selected");
+                db.all("SELECT barcode, name, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=? AND name LIKE ?", [query.category, '%' + query.products + '%'], function (err, rows) {
+                    console.log(rows);
+                    if (err) {
+                        return callback(err);
+                    }
+                    //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
+                    //en dan zijn de returnValues dus undefined
+                    callback(undefined, rows);
+                });
+            }
 
+        }
     });
     //wacht tot alle queries klaar zijn en sluit de database dan af
     db.close((err) => {

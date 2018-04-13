@@ -110,7 +110,7 @@ function readProductsFromDatabase(callback, query){
             if(query.products === "all")
             {
                 console.log("only category selected");
-                db.all("SELECT barcode, name, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=?", [query.category], function (err, rows) {
+                db.all("SELECT barcode, name, price, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=?", [query.category], function (err, rows) {
                     console.log(rows);
                     if (err) {
                         return callback(err);
@@ -122,7 +122,7 @@ function readProductsFromDatabase(callback, query){
             }
             else if(query.products !== "all") {
                 console.log("both selected");
-                db.all("SELECT barcode, name, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=? AND name LIKE ?", [query.category, '%' + query.products + '%'], function (err, rows) {
+                db.all("SELECT barcode, name, price, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=? AND name LIKE ?", [query.category, '%' + query.products + '%'], function (err, rows) {
                     console.log(rows);
                     if (err) {
                         return callback(err);

@@ -1,8 +1,12 @@
 //roept de callback functie getProducts aan, die met een GET de producten uit de database inlaadt en tekent.
 //laadt alle producten als je voor het eerst op de pagina komt
+var activeCategories = [];
+var categorystring;
+
 searchProducts(function (returnValues) {
-drawProducts(returnValues);
+    drawProducts(returnValues);
 });
+
 
 
 //terwijl je typt updaten de producten om te voldoen aan wat je zoekt
@@ -12,7 +16,23 @@ $("#productSearch").keyup(function (e) {
 
     searchProducts(function (returnValues) {
         drawProducts(returnValues);
-    }, "?products=" + this.value);
+    }, "?products=" + this.value + categorystring);
+});
+
+$('.category').click(function (e) {
+    var clickedCat = $(this).attr('id');
+    //if the clicked category is not in the active categories yet, add it.
+    if(activeCategories.indexOf(clickedCat) == -1) {
+        activeCategories.push(clickedCat);
+    }
+    console.log(activeCategories);
+    console.log(activeCategories.join("&category="));
+    for(let i = 0; i < activeCategories.length; i++)
+    {
+
+    }
+
+
 });
 
 
@@ -41,19 +61,19 @@ var ProductBox = class {
             box.appendChild(title);
 
 
-                var imageEl = document.createElement("img");
-                imageEl.setAttribute("class", "productImage");
+            var imageEl = document.createElement("img");
+            imageEl.setAttribute("class", "productImage");
             if(image != null)
             {
-                imageEl.setAttribute("src", "images/products/" + image +".jpg");
+                imageEl.setAttribute("src", "/images/products/" + image +".jpg");
                 imageEl.setAttribute("alt", name);
             }
             else
             {
-                imageEl.setAttribute("src", "images/products/noimage.png");
+                imageEl.setAttribute("src", "/images/products/noimage.png");
                 imageEl.setAttribute("alt", "No Image Available");
             }
-                box.appendChild(imageEl);
+            box.appendChild(imageEl);
 
 
 
@@ -108,7 +128,7 @@ function searchProducts(callback, search) {
     }
     $.ajax({
         type: 'GET',
-        url: './api/products'+search,
+        url: '/api/products'+search,
         dataType: 'json',
     })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
     //als het goed is gegaan, callt hij de .done hieronder.

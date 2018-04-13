@@ -17,16 +17,15 @@ var plotRouter = require('./routes/plot');
 var expressValidator = require('express-validator');
 var expressSession = require('express-session');
 var loginRouter = require('./routes/login');
-var loadPersonsRouter = require('./routes/loadPersons');
 var registerRouter = require('./routes/register');
 var addUserNameRouter = require('./routes/addUserName');
+var profileRouter = require('./routes/profile');
 
 //database communicatie bestanden
 var loadProducts = require('./routes/loadProducts');
 var checkLoginRouter = require('./routes/checkLogin');
 var registerUserRouter = require('./routes/registerDatabase');
-
-var profileRouter = require('./routes/profile');
+var editprofileRouter = require('./routes/profileDatabase');
 
 var app = express();
 
@@ -59,6 +58,7 @@ app.use('/api/addUserName', addUserNameRouter);
 app.use('/api/checkLogin', checkLoginRouter);
 app.use('/api/products', loadProducts);
 app.use('/api/register', registerUserRouter);
+app.use('/api/profile', editprofileRouter);
 
 app.use('/profile', profileRouter);
 

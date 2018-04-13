@@ -44,7 +44,7 @@ function readOrdersFromDatabase(callback, query){
                     return callback(err);
                 }
 
-               
+
                 //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
                 //en dan zijn de returnValues dus undefined
                 callback(undefined, rows);

@@ -22,6 +22,8 @@ var addUserNameRouter = require('./routes/addUserName');
 var profileRouter = require('./routes/profile');
 var historyRouter = require('./routes/history');
 
+var loginValidateRouter = require('./routes/loginValidate');
+
 //database communicatie bestanden
 var loadProducts = require('./routes/loadProducts');
 var checkLoginRouter = require('./routes/checkLogin');
@@ -56,6 +58,7 @@ app.use('/login', loginRouter);
 app.use('/register', registerRouter);
 app.use('/history', historyRouter);
 
+app.use('/loginValidate', loginValidateRouter);
 
 app.use('/api/addUserName', addUserNameRouter);
 app.use('/api/checkLogin', checkLoginRouter);

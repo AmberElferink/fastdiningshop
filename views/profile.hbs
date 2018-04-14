@@ -1,1 +1,49 @@
-<p>Hi there</p>
+
+
+<h1>{{ title }}</h1>
+{{# if success }}
+    <section class="success">
+        <h2>Succesfull validation</h2>
+    </section>
+{{ else }}
+    {{# if errors}}
+        <section class="errors">
+            <ul>
+                {{# each errors}}
+                    <li>
+                        {{this.msg}}
+                    </li>
+                {{/each}}
+            </ul>
+        </section>
+    {{/if}}
+    <section> <!-- form cannot be used since it will place the inserted values in the link. Using action will send user to the link. Instead it is handled with ajax in javascripts/register.js-->
+        <div class="input">
+            <label>First Name</label>
+            <input type="text" id="editfirstname" placeholder="your first name">
+        </div>
+        <div class="input">
+            <label>SurName</label>
+            <input type="text" id="editsurname" placeholder="your surname">
+        </div>
+        <div class="input">
+            <label>Email</label>
+            <input type="text" id="editemail" placeholder="your email address">
+        </div>
+        <div class="input">
+            <label>Username</label>
+            <input type="text" id="editusername" placeholder="your login name">
+        </div>
+        <div class="input">
+            <label>Password</label>
+            <input type="password" id="editpassword" name="password" placeholder="your password">
+        </div>
+        <div class="input">
+            <label>Confirm Password</label>
+            <input type="password" id="editconfirmPassword" name="confirmPassword" placeholder="confirm your password">
+        </div>
+
+        <button onclick="editProfile()" >Edit My Profile</button>
+    </section>
+
+{{/if}}

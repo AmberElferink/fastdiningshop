@@ -28,8 +28,44 @@ router.post('/', function (req, res) {
     },req.body);
 });
 
+router.get('/', function (req, res) {
+    console.log(req.query);
+    selectProfileFromDatabase(function(err, returnValues){
+        res.send(returnValues);
+    }, req.query.username);
+});
+
 module.exports = router;
 
+
+function selectProfileFromDatabase(callback, profileUser) {
+    let db = new sqlite3.Database(file, (err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log('Connected to the database');
+
+    });
+    db.serialize(function () {
+        console.log(profileUser);
+        db.all("SELECT firstname, surname, username, emailaddress FROM Persons WHERE username=?", [profileUser], function (err, rows) {
+            console.log(rows);
+            if (err) {
+                return callback(err);
+            }
+            //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
+            //en dan zijn de returnValues dus undefined
+            callback(undefined, rows);
+        });
+        //wacht tot alle queries klaar zijn en sluit de database dan af
+        db.close((err) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            console.log('Close the database connection.');
+        });
+    });
+}
 
 
 

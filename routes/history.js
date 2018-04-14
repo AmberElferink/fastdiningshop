@@ -7,13 +7,7 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 session = require('express-session');
-/*
-router.get('/:username',auth, function(req, res, next) {
-    console.log(req.param('username'));
-    res.render('profile', {title: 'Profile Fast Dining', layout: 'layoutProfile'});
 
-});*/
-//authorises if the user may access the page
 var auth = function (req, res, next) {
     if(req.session && req.session.user === req.query.user)
     {
@@ -25,15 +19,10 @@ var auth = function (req, res, next) {
     }
 };
 
-
-
-router.get('/', auth, function (req, res, next) {
-    console.log(req.query);
-
-    res.render('profile', {title: 'Profile Fast Dining', welcome: 'Hello ' + req.query.user, layout: 'layoutProfile', success: false, errors: req.session.errors});
-     req.session.errors = null;
+/* GET home page. */
+router.get('/', auth, function(req, res, next) {
+    res.render('history', { title: 'My Order History', layout:'layoutHistory', success: false, errors: req.session.errors});
+    req.session.errors = null;
 });
-
-
 
 module.exports = router;

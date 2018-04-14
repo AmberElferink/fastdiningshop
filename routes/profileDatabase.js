@@ -12,24 +12,28 @@ router.post('/', function (req, res) {
     req.check('email', 'Invalid email address').isEmail();
     req.check('password', 'Invalid password').isLength({min: 4}).equals(req.body.confirmPassword);
 
-addRegistryToDatabase(function(err, returnValues){
-    var data = returnValues;
-    res.send(data);
-    var errors = req.validationErrors();
-    if (errors){
-        req.session.error = errors;
-        req.session.succes = false;
-    } else {
-        req.session.succes = true;
+    addNewProfileToDatabase(function(err, returnValues){
+        var data = returnValues;
+        res.send(data);
 
-    }
-},req.body);
+
+        var errors = req.validationErrors();
+        if (errors){
+            req.session.error = errors;
+            req.session.succes = false;
+        } else {
+            req.session.succes = true;
+
+        }
+    },req.body);
 });
 
 module.exports = router;
 
 
-function addRegistryToDatabase(callback, registerData) {
+
+
+function addNewProfileToDatabase(callback, newProfileData) {
     console.log("checking");
     //creates a new database
     let db = new sqlite3.Database(file, (err) => {
@@ -44,13 +48,13 @@ function addRegistryToDatabase(callback, registerData) {
     db.serialize(function () {
 
         // insert one row into the langs table
-        db.run(`INSERT INTO Persons(firstname, surname, username, password, emailaddress) VALUES(?, ?, ?, ?, ?)`, [registerData.firstname, registerData.surname, registerData.username, registerData.password, registerData.emailaddress], function (err) {
+        db.run(`INSERT INTO Persons(firstname, surname, username, password, emailaddress) VALUES(?, ?, ?, ?, ?)`, [newProfileData.firstname, newProfileData.surname, newProfileData.username, newProfileData.password, newProfileData.emailaddress], function (err) {
             if (err) {
                 return console.log(err.message);
             }
             // get the last insert id
             console.log(`A row has been inserted with rowid ${this.lastID}`);
-            console.log(registerData);
+            console.log(newProfileData);
         });
     });
 
@@ -65,7 +69,7 @@ function addRegistryToDatabase(callback, registerData) {
                 callback(undefined, false);
                 return;
             }
-            else if (row[i].password == registerData.password) {
+            else if (row[i].password == newProfileData.password) {
                 callback(undefined, true);
                 return;
             }

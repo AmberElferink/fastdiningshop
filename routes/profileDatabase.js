@@ -58,14 +58,14 @@ function addNewProfileToDatabase(callback, newProfileData) {
         });
     });
 
-    db.all("SELECT * FROM Persons", function (err, row) {
+    db.all("SELECT * FROM Persons WHERE username =?",[newProfileData.username], function (err, row) {
         console.log(row);
         for(var i = 0; i < row.length; i++) {
             if (err) {
                 return callback(err);
             }
             if (row == undefined) {
-                //username not found in database
+                //new username not found in database
                 callback(undefined, false);
                 return;
             }
@@ -74,7 +74,7 @@ function addNewProfileToDatabase(callback, newProfileData) {
                 return;
             }
             else {
-                //password not correct
+                //something else went wrong
                 callback(undefined, false);
                 return;
             }

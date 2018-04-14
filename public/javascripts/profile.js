@@ -16,6 +16,20 @@ window.onload = function () {
     });
 }
 
+$('#sendButton').click(function () {
+    findLoggedInUser(function () {
+        editProfile(
+            function (returnValues) {
+                console.log(document.getElementById(currentFirstName));
+                firstname2 = returnValues[0].firstname;
+                var textnode = document.createTextNode(firstname2);
+                let firstname1 = document.createTextNode(returnValues[0].firstname);
+                //hij wil currentFirstname niet vinden, verder werkt het.
+                //document.getElementById(currentFirstName).appendChild(textnode);
+            }
+        )
+    });
+});
 
 
 function editProfile(){
@@ -28,7 +42,8 @@ function editProfile(){
             "surname": $('#editsurname').val(),
             "emailaddress": $('#editemail').val(),
             "username": $('#editusername').val(),
-            "password": $('#editpassword').val()
+            "password": $('#editpassword').val(),
+            "oldUserName": oldUserName
         }
     })
     //als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.

@@ -1,18 +1,34 @@
 //roept de callback functie getProducts aan, die met een GET de producten uit de database inlaadt en tekent.
 //laadt alle producten als je voor het eerst op de pagina komt
-searchProducts(function (returnValues) {
-drawProducts(returnValues);
-});
+var activeCategories = [];
+var categorystring;
 
+getProducts();
+
+function getProducts(){
+    var products = document.getElementById("productSearch").value;
+    $("#productBox").empty(); //verwijdert alle producten voor het zoeken
+    if(products == "")
+    {
+        products = "all";
+    }
+    searchProducts(function (returnValues) {
+        drawProducts(returnValues);
+    }, "?products=" + products + "&category=" + $('.category:checked').attr("id"));
+    console.log(document.getElementById("productSearch").value);
+    console.log($('.category:checked').attr("id"));
+
+}
 
 //terwijl je typt updaten de producten om te voldoen aan wat je zoekt
 $("#productSearch").keyup(function (e) {
-    console.log(this.value);
-    $("#productBox").empty(); //verwijdert alle producten voor het zoeken
+getProducts();
+});
 
-    searchProducts(function (returnValues) {
-        drawProducts(returnValues);
-    }, "?products=" + this.value);
+
+
+$('.category').click(function (e) {
+getProducts();
 });
 
 
@@ -41,19 +57,19 @@ var ProductBox = class {
             box.appendChild(title);
 
 
-                var imageEl = document.createElement("img");
-                imageEl.setAttribute("class", "productImage");
+            var imageEl = document.createElement("img");
+            imageEl.setAttribute("class", "productImage");
             if(image != null)
             {
-                imageEl.setAttribute("src", "images/products/" + image +".jpg");
+                imageEl.setAttribute("src", "/images/products/" + image +".jpg");
                 imageEl.setAttribute("alt", name);
             }
             else
             {
-                imageEl.setAttribute("src", "images/products/noimage.png");
+                imageEl.setAttribute("src", "/images/products/noimage.png");
                 imageEl.setAttribute("alt", "No Image Available");
             }
-                box.appendChild(imageEl);
+            box.appendChild(imageEl);
 
 
 
@@ -108,7 +124,7 @@ function searchProducts(callback, search) {
     }
     $.ajax({
         type: 'GET',
-        url: './api/products'+search,
+        url: '/api/products'+search,
         dataType: 'json',
     })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
     //als het goed is gegaan, callt hij de .done hieronder.

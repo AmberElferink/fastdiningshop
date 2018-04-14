@@ -29,8 +29,9 @@ var auth = function (req, res, next) {
 
 router.get('/', auth, function (req, res, next) {
     console.log(req.query);
-    res.render('profile', {title: 'Profile Fast Dining', layout: 'layoutProfile' ,success: false, errors: req.session.errors});
-    req.session.errors = null;
+
+    res.render('profile', {title: 'Profile Fast Dining', welcome: 'Hello ' + req.query.user, layout: 'layoutProfile', success: false, errors: req.session.errors});
+     req.session.errors = null;
 });
 
 

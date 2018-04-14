@@ -54,9 +54,8 @@ function addRegistryToDatabase(callback, registerData) {
         });
     });
 
-    db.all("SELECT * FROM Persons", function (err, row) {
+    db.all("SELECT * FROM Persons where username=?",[registerData.username], function (err, row) {
         console.log(row);
-        for(var i = 0; i < row.length; i++) {
             if (err) {
                 return callback(err);
             }
@@ -65,7 +64,7 @@ function addRegistryToDatabase(callback, registerData) {
                 callback(undefined, false);
                 return;
             }
-            else if (row[i].password == registerData.password) {
+            else if (row.password == registerData.password) {
                 callback(undefined, true);
                 return;
             }
@@ -74,7 +73,6 @@ function addRegistryToDatabase(callback, registerData) {
                 callback(undefined, false);
                 return;
             }
-        }
         //username not found in database row.length = 0
         callback(undefined, false);
         return;

@@ -21,7 +21,7 @@ $('#logout').click(function () {
 console.log("navbar javascript loaded");
 $('#historybutton').click(function () {
     let path = window.location.pathname;
-    let path2 = '?path2='+path.substr(1);
+    let path2 = '?path2='+path;
     let search = window.location.search;
     if(search)
     {

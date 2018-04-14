@@ -38,7 +38,12 @@ $('#historybutton').click(function () {
     })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
     //als het goed is gegaan, callt hij de .done hieronder.
         .done(function (data) {
-            window.location.assign('./loginValidate' + path + search);
+            if(data == false) {
+                window.location.assign('./login');
+            }
+            else {
+                window.location.assign('./history?user=' + data);
+            }
         })
         //als het niet goed is gegaan, doet hij de fail hieronder
         .fail(function (jqXHR, textStatus, err) {

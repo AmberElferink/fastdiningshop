@@ -18,25 +18,15 @@ $('#logout').click(function () {
         });
 });
 
-console.log("navbar javascript loaded");
+
+
 $('#historybutton').click(function () {
-    let path = window.location.pathname;
-    path = '?path='+path;
-    let search = window.location.search;
-    if(search)
-    {
-        search = '&search=' + window.location.search;
-    }
-    else
-    {
-        search = "";
-    }
     $.ajax({
         type: 'GET',
-        url: './loginValidate' + path + search,
+        url: './loginValidate',
         dataType: 'text',
-    })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
-    //als het goed is gegaan, callt hij de .done hieronder.
+    })//gets the current logged in username
+    //if there is currently no logged in user, the page will referred to login. If there is a user, the page will go to the /history page belonging to that user
         .done(function (data) {
             if(data == false) {
                 window.location.assign('./login');
@@ -51,3 +41,23 @@ $('#historybutton').click(function () {
         });
 });
 
+$('#editProfileButton').click(function () {
+    $.ajax({
+        type: 'GET',
+        url: './loginValidate',
+        dataType: 'text',
+    })//gets the current logged in username
+    //if there is currently no logged in user, the page will referred to login. If there is a user, the page will go to the /history page belonging to that user
+        .done(function (data) {
+            if(data == false) {
+                window.location.assign('./login');
+            }
+            else {
+                window.location.assign('./profile?user=' + data);
+            }
+        })
+        //als het niet goed is gegaan, doet hij de fail hieronder
+        .fail(function (jqXHR, textStatus, err) {
+            console.log('AJAX error response:', textStatus);
+        });
+});

@@ -28,7 +28,42 @@ router.post('/', function (req, res) {
     },req.body);
 });
 
+router.get('/', function (req, res) {
+    selectProfileFromDatabase(function(err, returnValues){
+    res.send(returnValues);
+    },        req.username);
+});
+
 module.exports = router;
+
+
+function selectProfileFromDatabase(profileUser) {
+    db.serialize(function () {
+
+    db.all("SELECT * FROM Persons WHERE username = ?",[profileUser], function (err, row) {
+        console.log(row);
+            if (err) {
+                return callback(err);
+            }
+            if (row == undefined) {
+                //username not found in database
+                callback(undefined, false);
+                return;
+            }
+        //username not found in database row.length = 0
+        callback(undefined, false);
+        return;
+    });
+
+    //wacht tot alle queries klaar zijn en sluit de database dan af
+    db.close((err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log('Close the database connection.');
+    });
+});
+}
 
 
 
@@ -92,4 +127,3 @@ function addNewProfileToDatabase(callback, newProfileData) {
         console.log('Close the database connection.');
     });
 }
-module.exports = router;

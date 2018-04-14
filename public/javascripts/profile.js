@@ -1,3 +1,16 @@
+var oldUserName = "notLoggedIn";
+findLoggedInUser();
+
+findLoggedInUser(
+    selectDatabaseProfile(
+        function(returnValues) {
+            let firstname = document.createTextNode(returnValues.firstname);
+            $('#firstname').appendChild(firstname);
+        }
+));
+
+
+
 function editProfile(){
     $.ajax({
         type: 'POST',
@@ -23,10 +36,10 @@ function editProfile(){
             console.log('AJAX error response:', textStatus);
         });
 }
-var oldUserName = "notLoggedIn";
-findOldUserName();
 
-function findOldUserName() {
+
+
+function findLoggedInUser(callback) {
     $.ajax({
         type: 'GET',
         url: './loginValidate',
@@ -34,13 +47,30 @@ function findOldUserName() {
     })//gets the current logged in username
     //if there is currently no logged in user, the page will referred to login. If there is a user, the page will go to the /history page belonging to that user
         .done(function (data) {
-            if (data == false) {
-                oldUserName = "notLoggedIn";
-            }
-            else {
-                oldUserName = data;
-            }
-            console.log(oldUserName);
+                if (data == false) {
+                    oldUserName = "notLoggedIn";
+                }
+                else {
+                    oldUserName = data;
+                }
+                console.log("oldusername", oldUserName);
+                callback();
+        })
+        //als het niet goed is gegaan, doet hij de fail hieronder
+        .fail(function (jqXHR, textStatus, err) {
+            console.log('AJAX error response:', textStatus);
+        });
+}
+
+function selectDatabaseProfile(callback) {
+    $.ajax({
+        type: 'GET',
+        url: './api/profile?username=' +oldUserName,
+        dataType: 'json',
+    })//gets the current logged in username
+    //if there is currently no logged in user, the page will referred to login. If there is a user, the page will go to the /history page belonging to that user
+        .done(function (data) {
+            callback(data);
         })
         //als het niet goed is gegaan, doet hij de fail hieronder
         .fail(function (jqXHR, textStatus, err) {

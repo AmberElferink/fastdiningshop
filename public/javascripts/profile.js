@@ -23,3 +23,27 @@ function editProfile(){
             console.log('AJAX error response:', textStatus);
         });
 }
+var oldUserName = "notLoggedIn";
+findOldUserName();
+
+function findOldUserName() {
+    $.ajax({
+        type: 'GET',
+        url: './loginValidate',
+        dataType: 'text',
+    })//gets the current logged in username
+    //if there is currently no logged in user, the page will referred to login. If there is a user, the page will go to the /history page belonging to that user
+        .done(function (data) {
+            if (data == false) {
+                oldUserName = "notLoggedIn";
+            }
+            else {
+                oldUserName = data;
+            }
+            console.log(oldUserName);
+        })
+        //als het niet goed is gegaan, doet hij de fail hieronder
+        .fail(function (jqXHR, textStatus, err) {
+            console.log('AJAX error response:', textStatus);
+        });
+}

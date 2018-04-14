@@ -15,6 +15,10 @@ router.get('/:username',auth, function(req, res, next) {
 });*/
 //authorises if the user may access the page
 var auth = function (req, res, next) {
+    if(req.query.user == undefined) //the path is /profile, without a query
+    {
+        return res.sendStatus(401); //login session not active/unauthorised
+    }
     if(req.session && req.session.user === req.query.user)
     {
         return next();

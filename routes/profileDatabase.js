@@ -60,7 +60,6 @@ function addNewProfileToDatabase(callback, newProfileData) {
 
     db.all("SELECT * FROM Persons WHERE username =?",[newProfileData.username], function (err, row) {
         console.log(row);
-        for(var i = 0; i < row.length; i++) {
             if (err) {
                 return callback(err);
             }
@@ -69,7 +68,7 @@ function addNewProfileToDatabase(callback, newProfileData) {
                 callback(undefined, false);
                 return;
             }
-            else if (row[i].password == newProfileData.password) {
+            else if (row.password == newProfileData.password) {
                 callback(undefined, true);
                 return;
             }
@@ -78,7 +77,6 @@ function addNewProfileToDatabase(callback, newProfileData) {
                 callback(undefined, false);
                 return;
             }
-        }
         //username not found in database row.length = 0
         callback(undefined, false);
         return;

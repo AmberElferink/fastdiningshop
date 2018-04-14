@@ -12,7 +12,7 @@ session = require('express-session');
 
 router.get('/',function(req, res, next) {
     if(req.session) {
-        res.send(req.session.user + " origin: " + req.query.path2 + " "+ req.query.search2);
+        res.send(req.session.user + " origin: " + req.query.path + req.query.search);
         //req.session.errors = null;
     } else{
         res.send("No User");

@@ -21,11 +21,11 @@ $('#logout').click(function () {
 console.log("navbar javascript loaded");
 $('#historybutton').click(function () {
     let path = window.location.pathname;
-    let path2 = '?path2='+path;
+    path = '?path='+path;
     let search = window.location.search;
     if(search)
     {
-        search = '&search2=' + window.location.search;
+        search = '&search=' + window.location.search;
     }
     else
     {
@@ -33,12 +33,12 @@ $('#historybutton').click(function () {
     }
     $.ajax({
         type: 'GET',
-        url: './loginValidate' + path2 + search,
+        url: './loginValidate' + path + search,
         dataType: 'text',
     })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
     //als het goed is gegaan, callt hij de .done hieronder.
         .done(function (data) {
-            window.location.assign('./loginValidate' + path2 + search);
+            window.location.assign('./loginValidate' + path + search);
         })
         //als het niet goed is gegaan, doet hij de fail hieronder
         .fail(function (jqXHR, textStatus, err) {

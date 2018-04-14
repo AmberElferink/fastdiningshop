@@ -61,7 +61,7 @@ var ProductBox = class {
             imageEl.setAttribute("class", "productImage");
             if(image != null)
             {
-                imageEl.setAttribute("src", "/images/products/" + image +".jpg");
+                imageEl.setAttribute("src", "images/products/" + image +".jpg");
                 imageEl.setAttribute("alt", name);
             }
             else

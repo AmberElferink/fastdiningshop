@@ -1,13 +1,20 @@
 var oldUserName = "notLoggedIn";
-findLoggedInUser();
+findLoggedInUser(function(user){});
 
-findLoggedInUser(
-    selectDatabaseProfile(
-        function(returnValues) {
-            let firstname = document.createTextNode(returnValues.firstname);
-            $('#firstname').appendChild(firstname);
-        }
-));
+window.onload = function () {
+    findLoggedInUser(function () {
+        selectDatabaseProfile(
+            function (returnValues) {
+                console.log(document.getElementById(currentFirstName));
+                firstname2 = returnValues[0].firstname;
+                var textnode = document.createTextNode(firstname2);
+                let firstname1 = document.createTextNode(returnValues[0].firstname);
+                //hij wil currentFirstname niet vinden, verder werkt het.
+                //document.getElementById(currentFirstName).appendChild(textnode);
+            }
+        )
+    });
+}
 
 
 
@@ -70,6 +77,7 @@ function selectDatabaseProfile(callback) {
     })//gets the current logged in username
     //if there is currently no logged in user, the page will referred to login. If there is a user, the page will go to the /history page belonging to that user
         .done(function (data) {
+            console.log(data);
             callback(data);
         })
         //als het niet goed is gegaan, doet hij de fail hieronder

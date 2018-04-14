@@ -1,8 +1,10 @@
 
+
 var sqlite3 = require('sqlite3').verbose();
 var fs = require("fs");
 var file = __dirname + "/../ConnectionJs/fastdining.db";
 var exists = fs.existsSync(file);
+
 var express = require('express');
 var router = express.Router();
 
@@ -29,32 +31,34 @@ router.post('/', function (req, res) {
 });
 
 router.get('/', function (req, res) {
+    console.log(req.query);
     selectProfileFromDatabase(function(err, returnValues){
     res.send(returnValues);
-    },        req.username);
+    }, req.query.username);
 });
 
 module.exports = router;
 
 
-function selectProfileFromDatabase(profileUser) {
-    db.serialize(function () {
+function selectProfileFromDatabase(callback, profileUser) {
+    let db = new sqlite3.Database(file, (err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log('Connected to the database');
 
-    db.all("SELECT * FROM Persons WHERE username = ?",[profileUser], function (err, row) {
-        console.log(row);
+    });
+    db.serialize(function () {
+        console.log(profileUser);
+        db.all("SELECT * FROM Persons WHERE username=?", [profileUser], function (err, rows) {
+            console.log(rows);
             if (err) {
                 return callback(err);
             }
-            if (row == undefined) {
-                //username not found in database
-                callback(undefined, false);
-                return;
-            }
-        //username not found in database row.length = 0
-        callback(undefined, false);
-        return;
-    });
-
+            //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
+            //en dan zijn de returnValues dus undefined
+            callback(undefined, rows);
+        });
     //wacht tot alle queries klaar zijn en sluit de database dan af
     db.close((err) => {
         if (err) {

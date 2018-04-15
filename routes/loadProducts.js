@@ -79,12 +79,22 @@ function readProductsFromDatabase(callback, query){
         console.log(query);
         console.log(query.products); //query.products is wat ingetypt is, dus waar de query op moet werken
         console.log(query.category);
-        console.log(query.orderby);
-        var orderby = " ORDER BY ? ASC";
+
+        //this is not the best solution. But inserting the query.orderby with a ? as the rest strangely did not sort the products at all. I really tried.
+        if(query.orderby === "name")
+        {
+            var orderby = " ORDER BY name ASC";
+        }
+        else if(query.orderby === "price")
+        {
+            orderby = " ORDER BY price ASC";
+        }
+
+
         if(query.category === "all") {
             if (query.products === "all") {
                 console.log("neither selected");
-                db.all("SELECT * FROM Products ORDER BY ? ASC", [query.orderby], function (err, rows) {
+                db.all("SELECT * FROM Products" + orderby, [], function (err, rows) {
                     console.log(rows);
                     if (err) {
                         return callback(err);
@@ -96,7 +106,7 @@ function readProductsFromDatabase(callback, query){
             }
             else if (query.products !== "all"){
                 console.log("only products selected");
-                db.all("SELECT * FROM Products WHERE name LIKE ? ORDER BY ? ASC", ['%' + query.products + '%', query.orderby], function (err, rows) {
+                db.all("SELECT * FROM Products WHERE name LIKE ?" + orderby, ['%' + query.products + '%'], function (err, rows) {
                     console.log(rows);
                     if (err) {
                         return callback(err);
@@ -111,7 +121,7 @@ function readProductsFromDatabase(callback, query){
             if(query.products === "all")
             {
                 console.log("only category selected");
-                db.all("SELECT barcode, name, price, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=? ORDER BY ? ASC", [query.category, query.orderby], function (err, rows) {
+                db.all("SELECT barcode, name, price, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=?" + orderby, [query.category], function (err, rows) {
                     console.log(rows);
                     if (err) {
                         return callback(err);
@@ -123,7 +133,7 @@ function readProductsFromDatabase(callback, query){
             }
             else if(query.products !== "all") {
                 console.log("both selected");
-                db.all("SELECT barcode, name, price, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=? AND name LIKE ? ORDER BY ? ASC", [query.category, '%' + query.products + '%', query.orderby], function (err, rows) {
+                db.all("SELECT barcode, name, price, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=? AND name LIKE ?" + orderby, [query.category, '%' + query.products + '%'], function (err, rows) {
                     console.log(rows);
                     if (err) {
                         return callback(err);

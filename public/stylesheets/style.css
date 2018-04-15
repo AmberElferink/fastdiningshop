@@ -141,7 +141,7 @@ table.paleRedRows tbody td {
 
 aside.sidenav {
   height: 100%;
-  width: 250px;
+    width: 350px;
   position: fixed;
   top: 0;
   right: 0;
@@ -151,7 +151,7 @@ aside.sidenav {
 }
 
 .whiteaside{
-  height: 100%;
+  height: 40%;
   width: 100%;
   float: right;
   background: white;
@@ -365,7 +365,7 @@ h1.sidenav {
     border-style: solid;
     border-color:#ccc;
     border-radius: 5px;
-    width: 50%;
+    width: 500px;;
     padding: 15px;
 }
 

@@ -15,8 +15,8 @@
 <h1>{{title}}</h1>
 <aside class="sidenav">
 
-    <section class="categories"><h1 class="sidenav">Categories</h1>
-            <ul class="categoryinputs">
+    <section class="categories whiteaside"><h1 class="sidenav">Categories</h1>
+            <ul class="categoryinputs radiobuttons">
                 <li><input type="radio" name="category" id="all" class="category" checked>  Select all</li>
                 <li><input type="radio" name="category" id="dairy" class="category">  Dairy</li>
                 <li><input type="radio" name="category" id="fruits" class="category">  Fruits</li>
@@ -30,6 +30,13 @@
                 <li><input type="radio" name="category" id="vegetables" class="category">  Vegetables</li>
                 <li><input type="radio" name="category" id="nuts" class="category">  Nuts</li>
             </ul>
+    </section>
+    <br>
+    <section class="orderProducts whiteaside"><h1 class="sidenav">Sort products by</h1>
+        <ul class="orderbyinputs radiobuttons">
+            <li><input type="radio" name="orderby" id="name" class="orderby" checked>  Name</li>
+            <li><input type="radio" name="orderby" id="price" class="orderby">  Price</li>
+        </ul>
     </section>
 </aside>
 <h2>Search for products</h2>

@@ -12,7 +12,7 @@ function getProducts(){
     }
     searchProducts(function (returnValues) {
         drawProducts(returnValues);
-    }, "?products=" + products + "&category=" + $('.category:checked').attr("id"));
+    }, "?products=" + products + "&category=" + $('.category:checked').attr("id") + "&orderby=" + $('.orderby:checked').attr("id"));
     console.log(document.getElementById("productSearch").value);
     console.log($('.category:checked').attr("id"));
 
@@ -25,6 +25,10 @@ $("#productSearch").keyup(function (e) {
 
 
 $('.category').click(function (e) {
+    getProducts();
+});
+
+$('.orderby').click(function (e) {
     getProducts();
 });
 

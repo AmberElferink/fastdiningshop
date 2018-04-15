@@ -28,8 +28,44 @@ router.post('/', function (req, res) {
     },req.body);
 });
 
+router.get('/', function (req, res) {
+    console.log(req.query);
+    selectProfileFromDatabase(function(err, returnValues){
+        res.send(returnValues);
+    }, req.query.username);
+});
+
 module.exports = router;
 
+
+function selectProfileFromDatabase(callback, profileUser) {
+    let db = new sqlite3.Database(file, (err) => {
+        if (err) {
+            return console.error(err.message);
+        }
+        console.log('Connected to the database');
+
+    });
+    db.serialize(function () {
+        console.log(profileUser);
+        db.all("SELECT firstname, surname, username, emailaddress FROM Persons WHERE username=?", [profileUser], function (err, rows) {
+            console.log(rows);
+            if (err) {
+                return callback(err);
+            }
+            //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
+            //en dan zijn de returnValues dus undefined
+            callback(undefined, rows);
+        });
+        //wacht tot alle queries klaar zijn en sluit de database dan af
+        db.close((err) => {
+            if (err) {
+                return console.error(err.message);
+            }
+            console.log('Close the database connection.');
+        });
+    });
+}
 
 
 
@@ -46,9 +82,9 @@ function addNewProfileToDatabase(callback, newProfileData) {
 
     //selects correct tuple and checks if password is the same as the entered password.
     db.serialize(function () {
-
+        console.log(newProfileData)
         // insert one row into the langs table
-        db.run(`INSERT INTO Persons(firstname, surname, username, password, emailaddress) VALUES(?, ?, ?, ?, ?)`, [newProfileData.firstname, newProfileData.surname, newProfileData.username, newProfileData.password, newProfileData.emailaddress], function (err) {
+        db.run("UPDATE Persons SET firstname=?, surname=?, username=?, password=?, emailaddress=? WHERE username=?", [newProfileData.firstname, newProfileData.surname, newProfileData.username, newProfileData.password, newProfileData.emailaddress, newProfileData.oldUserName], function (err) {
             if (err) {
                 return console.log(err.message);
             }
@@ -58,27 +94,25 @@ function addNewProfileToDatabase(callback, newProfileData) {
         });
     });
 
-    db.all("SELECT * FROM Persons", function (err, row) {
+    db.all("SELECT * FROM Persons WHERE username =?",[newProfileData.username], function (err, row) {
         console.log(row);
-        for(var i = 0; i < row.length; i++) {
             if (err) {
                 return callback(err);
             }
             if (row == undefined) {
-                //username not found in database
+                //new username not found in database
                 callback(undefined, false);
                 return;
             }
-            else if (row[i].password == newProfileData.password) {
+            else if (row.password == newProfileData.password) {
                 callback(undefined, true);
                 return;
             }
             else {
-                //password not correct
+                //something else went wrong
                 callback(undefined, false);
                 return;
             }
-        }
         //username not found in database row.length = 0
         callback(undefined, false);
         return;

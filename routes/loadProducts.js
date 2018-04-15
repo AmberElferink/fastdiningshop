@@ -60,12 +60,6 @@ router.get('/', function (req, res) {
 module.exports = router;
 
 
-
-
-
-
-
-
 function readProductsFromDatabase(callback, query){
     //creates a new database
     let db = new sqlite3.Database(file, (err) => {
@@ -80,10 +74,21 @@ function readProductsFromDatabase(callback, query){
         console.log(query.products); //query.products is wat ingetypt is, dus waar de query op moet werken
         console.log(query.category);
 
+        //this is not the best solution. But inserting the query.orderby with a ? as the rest strangely did not sort the products at all. I really tried.
+        if(query.orderby === "name")
+        {
+            var orderby = " ORDER BY name ASC";
+        }
+        else if(query.orderby === "price")
+        {
+            orderby = " ORDER BY price ASC";
+        }
+
+
         if(query.category === "all") {
             if (query.products === "all") {
                 console.log("neither selected");
-                db.all("SELECT * FROM Products", [], function (err, rows) {
+                db.all("SELECT * FROM Products" + orderby, [], function (err, rows) {
                     console.log(rows);
                     if (err) {
                         return callback(err);
@@ -95,7 +100,7 @@ function readProductsFromDatabase(callback, query){
             }
             else if (query.products !== "all"){
                 console.log("only products selected");
-                db.all("SELECT * FROM Products WHERE name LIKE ?", ['%' + query.products + '%'], function (err, rows) {
+                db.all("SELECT * FROM Products WHERE name LIKE ?" + orderby, ['%' + query.products + '%'], function (err, rows) {
                     console.log(rows);
                     if (err) {
                         return callback(err);
@@ -110,7 +115,7 @@ function readProductsFromDatabase(callback, query){
             if(query.products === "all")
             {
                 console.log("only category selected");
-                db.all("SELECT barcode, name, price, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=?", [query.category], function (err, rows) {
+                db.all("SELECT barcode, name, price, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=?" + orderby, [query.category], function (err, rows) {
                     console.log(rows);
                     if (err) {
                         return callback(err);
@@ -122,7 +127,7 @@ function readProductsFromDatabase(callback, query){
             }
             else if(query.products !== "all") {
                 console.log("both selected");
-                db.all("SELECT barcode, name, price, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=? AND name LIKE ?", [query.category, '%' + query.products + '%'], function (err, rows) {
+                db.all("SELECT barcode, name, price, quantity, unit, manufacturer, description, image FROM (SELECT * FROM Products LEFT OUTER JOIN Categories ON Categories.productid = Products.barcode) WHERE category=? AND name LIKE ?" + orderby, [query.category, '%' + query.products + '%'], function (err, rows) {
                     console.log(rows);
                     if (err) {
                         return callback(err);
@@ -146,28 +151,6 @@ function readProductsFromDatabase(callback, query){
 
 
 
-
-
-
-//db.get als je een tupel wil krijgen
-//geeft het terug in een javascript object
-//row.name geeft naam
-//db.all als je alle tupels wil in een array. Elk object is een element uit een array
-/*
-Als je dingen zou willen toevoegen aan de database:
-// Start preparing the statement
-  var stmt = db.prepare("INSERT INTO Stuff VALUES (?)");
-
-//Insert random data
-  var rnd;
-  for (var i = 0; i < 10; i++) {
-    rnd = Math.floor(Math.random() * 10000000);
-    stmt.run("Thing #" + rnd); // running the statement
-  }
-// Finishing the statement. Not necessary, but improves performance
-  stmt.finalize();
-
- */
 
 
 

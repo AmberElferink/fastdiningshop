@@ -20,15 +20,12 @@ app.use(session({
 /*If a get or post loads a page, for instance /myprofile, it wil look if the person is authorised to see it using this.
  */
 
-
-
-
 /* GET home page. */
 router.post('/login', function (req, res) {
 
-    //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
-    //alles binnen deze functie doet hij pas nadat de callback is uitgevoerd. Als je res.send(data);
-    //dus onder de }); zet, dan krijg je undefined terug omdat de callback nog niet klaar was, toen hij was uitgevoerd
+    //this function is were the callback(undefined, rows) is called
+    //everything inside this function is done after the callback is done, if you put res.send(data);
+    //under the });, it gives you back undefined because is was not done, when called upon
     checkLoginWithDatabase(function(err, returnValues, username){
         //login is correct
         if(returnValues == true)
@@ -50,23 +47,13 @@ router.post('/login', function (req, res) {
 });
 
 router.get('/logout', function (req, res) {
-    console.log("I am logging out");
     req.session.destroy();
     res.send("logout success!");
 });
 
-
-
-
 module.exports = router;
 
-
-
-
-
-
-
-
+//this function checkes the the input username and password to the usernames and passwords in the database
 function checkLoginWithDatabase(callback, loginData){
     console.log("checking");
     //creates a new database
@@ -107,7 +94,7 @@ function checkLoginWithDatabase(callback, loginData){
                 return;
             });
     });
-    //wacht tot alle queries klaar zijn en sluit de database dan af
+    //waits untill all queries are done and than exits the database
     db.close((err) => {
         if (err) {
             return console.error(err.message);
@@ -116,30 +103,6 @@ function checkLoginWithDatabase(callback, loginData){
     });
 }
 
-
-
-
-
-
-//db.get als je een tupel wil krijgen
-//geeft het terug in een javascript object
-//row.name geeft naam
-//db.all als je alle tupels wil in een array. Elk object is een element uit een array
-/*
-Als je dingen zou willen toevoegen aan de database:
-// Start preparing the statement
-  var stmt = db.prepare("INSERT INTO Stuff VALUES (?)");
-
-//Insert random data
-  var rnd;
-  for (var i = 0; i < 10; i++) {
-    rnd = Math.floor(Math.random() * 10000000);
-    stmt.run("Thing #" + rnd); // running the statement
-  }
-// Finishing the statement. Not necessary, but improves performance
-  stmt.finalize();
-
- */
 
 
 

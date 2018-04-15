@@ -7,21 +7,4 @@ router.get('/', function(req, res, next) {
     req.session.errors = null;
 });
 
-/*
-router.post('/submit', function(req, res, next){
-    req.check('email', 'Invalid email address').isEmail();
-    req.check('password', 'Invalid password').isLength({min: 4}).equals(req.body.confirmPassword);
-
-    var errors = req.validationErrors();
-    if (errors){
-        req.session.error = errors;
-        req.session.succes = false;
-    } else {
-        req.session.succes = true;
-
-    }
-    res.redirect('/login')
-});
-*/
-
 module.exports = router;

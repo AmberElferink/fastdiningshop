@@ -119,18 +119,18 @@ INSERT INTO Categories (productid, category) VALUES
 
 
 
-INSERT INTO Orders (orderid, productid, username) VALUES
-(123456, 123274394106, "Gordon"), --Gordon ordered cherries
-(234567, 378563892894, "Gordon"), --"            " lemons
-(345678, 132485294754, "Gordon"), --"            " cucumber
-(456789, 678503425713, "mannetje"), --mannetje ordered mayonaise
-(567890, 121349345024, "mannetje"), --"              " onions
-(678901, 132449182373, "mannetje"), --"              " sugar
-(789012, 346989092397, "FatimaLove"), --FatimaLove ordered pine nuts
-(890123, 682392327978, "FatimaLove"), --"                " gnocchi
-(901234, 123965419345, "FatimaLove"), --"                " tomatoes
-(012345, 234901235782, "Dentist"), --Dentist ordered red pepper
-(112233, 672057684020, "Dentist"), --"                " watermelon
-(223344, 234578376523, "Dentist"); --"                " ricotta
+INSERT INTO Orders (productid, personid) VALUES
+(123274394106, 1), --Gordon ordered cherries
+(378563892894, 1), --"            " lemons
+(132485294754, 1), --"            " cucumber
+(678503425713, 2), --mannetje ordered mayonaise
+(121349345024, 2), --"              " onions
+(132449182373, 2), --"              " sugar
+(346989092397, 5), --FatimaLove ordered pine nuts
+(682392327978, 5), --"                " gnocchi
+(123965419345, 5), --"                " tomatoes
+(234901235782, 6), --Dentist ordered red pepper
+(672057684020, 6), --"                " watermelon
+(234578376523, 6); --"                " ricotta
 
 

@@ -1,6 +1,9 @@
+//this file makes a plot that shows the content of the different ingredients
+//interact of: http://bseth99.github.io/projects/canvas/A-flot-interact-labels.html
+//tutorial used: http://www.jqueryflottutorial.com/how-to-make-jquery-flot-bar-chart.html
+
 $(function() {
-    //interact van: http://bseth99.github.io/projects/canvas/A-flot-interact-labels.html
-    //tutorial gebruikt: http://www.jqueryflottutorial.com/how-to-make-jquery-flot-bar-chart.html
+
 
 //DATA
     //data for the watermelon and feta starter recipe
@@ -339,12 +342,6 @@ $(function() {
         nutrientdata.splice(index, 1);
         plotChart();
     }
-
-
-
-
-
-
 
 
 

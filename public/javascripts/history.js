@@ -1,11 +1,42 @@
+//this file will show the order history of the logedin user.
+//it will show the orderid, the title of title of the products and the image of the product.
 
 
+var personid;
 
-OrderHistory(function(returnValues){
-    drawOrders(returnValues);
-}, window.location.search);
+findLoggedInUser(function () {
+    OrderHistory(function(returnValues){
+        drawOrders(returnValues);
+    }, personid);
 
-//tekent de productboxen
+});
+
+
+function findLoggedInUser(callback) {
+    $.ajax({
+        type: 'GET',
+        url: './loginPersonid',
+        dataType: 'text',
+    })//gets the current logged in username
+    //if there is currently no logged in user, the page will referred to login. If there is a user, the page will go to the /history page belonging to that user
+        .done(function (data) {
+            if (data == false) {
+                personid = "notLoggedIn";
+            }
+            else {
+                personid = data;
+            }
+            console.log("personid", personid);
+            callback();
+        })
+        //als het niet goed is gegaan, doet hij de fail hieronder
+        .fail(function (jqXHR, textStatus, err) {
+            console.log('AJAX error response:', textStatus);
+        });
+}
+
+
+//this function will call the drawOrders function
 function drawOrders(returnValues) {
 
 
@@ -20,14 +51,11 @@ function drawOrders(returnValues) {
     }
 }
 
+//this class is used to make the order boxes
 var OrderBox = class{
     constructor(name, image, orderid){
 
-
-
         this.draw = function () {
-
-
 
             var box = document.createElement("article");
             box.setAttribute("class", "orderBox");
@@ -66,13 +94,14 @@ var OrderBox = class{
 
 }}
 
+//this function will get the information needed out of the database
 function OrderHistory(callback, user) {
     console.log("user");
     console.log(user);
 
     $.ajax({
         type: 'GET',
-        url: './api/history' + user,
+        url: './api/history?user=' + user,
         dataType: 'json',
     })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
     //als het goed is gegaan, callt hij de .done hieronder.

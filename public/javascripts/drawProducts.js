@@ -179,35 +179,44 @@ function buyProduct(barcode) {
             "user": currentUser
 
         });
-        if (confirmation) {
-            $.ajax({
-                type: 'POST',
-                url: './api/products',
-                dataType: 'json',
-                data: {
-                    "orderid": Math.floor(100000 + Math.random() * 900000),
-                    "productid": barcode,
-                    "user": currentUser
+        if(currentUser != "notLoggedIn")
+        {
+            if (confirmation) {
+                $.ajax({
+                    type: 'POST',
+                    url: './api/products',
+                    dataType: 'json',
+                    data: {
+                        "orderid": Math.floor(100000 + Math.random() * 900000),
+                        "productid": barcode,
+                        "user": currentUser
 
-                }
-            })
-            //als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
-            //als het goed is gegaan, callt hij de .done hieronder.
-                .done(function (data) {
-                    console.log(data);
-
+                    }
                 })
-                //als het niet goed is gegaan, doet hij de fail hieronder
-                .fail(function (jqXHR, textStatus, err) {
-                    console.log('AJAX error response:', textStatus);
-                });
+                //als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
+                //als het goed is gegaan, callt hij de .done hieronder.
+                    .done(function (data) {
+                        console.log(data);
+
+                    })
+                    //als het niet goed is gegaan, doet hij de fail hieronder
+                    .fail(function (jqXHR, textStatus, err) {
+                        console.log('AJAX error response:', textStatus);
+                    });
 
 
-            txt = "You pressed OK!";
-        } else {
-            txt = "You pressed Cancel!";
+                txt = "You pressed OK!";
+            } else {
+                txt = "You pressed Cancel!";
+            }
+            console.log(txt);
         }
-        console.log(txt);
+        else
+        {
+            alert("Please log in to purchase a product.");
+            window.location.assign("./login");
+        }
+
     });
    
 }

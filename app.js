@@ -31,6 +31,7 @@ var checkLoginRouter = require('./routes/checkLogin');
 var registerUserRouter = require('./routes/registerDatabase');
 var editprofileRouter = require('./routes/profileDatabase');
 var historyDatabaseRouter = require('./routes/historyDatabase');
+var placeOrderRouter = require('./routes/buyProductDatabase');
 
 var app = express();
 
@@ -68,6 +69,7 @@ app.use('/api/products', loadProducts);
 app.use('/api/register', registerUserRouter);
 app.use('/api/profile', editprofileRouter);
 app.use('/api/history', historyDatabaseRouter);
+app.use('/api/placeOrder', placeOrderRouter);
 app.use('/profile', profileRouter);
 
 // /profile?user=Dentist

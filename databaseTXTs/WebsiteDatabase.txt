@@ -29,7 +29,7 @@ CONSTRAINT Category PRIMARY KEY (productid, category)
 );
 
 CREATE TABLE Orders (
-orderid integer not null primary key,
+orderid integer not null primary key autoincrement,
 productid integer not null,
 personid integer not null,
  FOREIGN KEY(personid)REFERENCES Persons(personid),

@@ -147,7 +147,7 @@ function searchProducts(callback, search) {
 function findLoggedInUser(callback) {
     $.ajax({
         type: 'GET',
-        url: './loginValidate',
+        url: './loginPersonid',
         dataType: 'text',
     })//gets the current logged in username
     //if there is currently no logged in user, the page will referred to login. If there is a user, the page will go to the /history page belonging to that user
@@ -174,7 +174,6 @@ function buyProduct(barcode) {
         //var barcode = $('this').attr('id');
         var confirmation = confirm("Are you sure you want to purchase this product?");
         console.log( {
-            "orderid": Math.floor(100000 + Math.random() * 900000),
             "productid": barcode,
             "user": currentUser
 
@@ -184,10 +183,9 @@ function buyProduct(barcode) {
             if (confirmation) {
                 $.ajax({
                     type: 'POST',
-                    url: './api/products',
+                    url: './api/placeOrder',
                     dataType: 'json',
                     data: {
-                        "orderid": Math.floor(100000 + Math.random() * 900000),
                         "productid": barcode,
                         "user": currentUser
 

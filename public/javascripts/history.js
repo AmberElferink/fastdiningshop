@@ -1,9 +1,35 @@
+var personid;
+
+findLoggedInUser(function () {
+    OrderHistory(function(returnValues){
+        drawOrders(returnValues);
+    }, personid);
+
+});
 
 
-
-OrderHistory(function(returnValues){
-    drawOrders(returnValues);
-}, window.location.search);
+function findLoggedInUser(callback) {
+    $.ajax({
+        type: 'GET',
+        url: './loginPersonid',
+        dataType: 'text',
+    })//gets the current logged in username
+    //if there is currently no logged in user, the page will referred to login. If there is a user, the page will go to the /history page belonging to that user
+        .done(function (data) {
+            if (data == false) {
+                personid = "notLoggedIn";
+            }
+            else {
+                personid = data;
+            }
+            console.log("personid", personid);
+            callback();
+        })
+        //als het niet goed is gegaan, doet hij de fail hieronder
+        .fail(function (jqXHR, textStatus, err) {
+            console.log('AJAX error response:', textStatus);
+        });
+}
 
 //tekent de productboxen
 function drawOrders(returnValues) {
@@ -72,7 +98,7 @@ function OrderHistory(callback, user) {
 
     $.ajax({
         type: 'GET',
-        url: './api/history' + user,
+        url: './api/history?user=' + user,
         dataType: 'json',
     })//als deze asynchronous ajax call klaar is, is het of gefaald, of goed gegaan.
     //als het goed is gegaan, callt hij de .done hieronder.

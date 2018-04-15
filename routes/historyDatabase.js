@@ -39,7 +39,7 @@ function readOrdersFromDatabase(callback, query){
         else
         {
 
-            db.all("SELECT * FROM(SELECT * FROM(SELECT username AS orderuser, * FROM Products LEFT OUTER JOIN Orders ON Orders.productid = Products.barcode) LEFT OUTER JOIN Persons ON Persons.username = orderuser) WHERE username = ? ", [query.user], function (err, rows) {
+            db.all("SELECT * FROM(SELECT * FROM(SELECT personid AS orderuser, * FROM Products LEFT OUTER JOIN Orders ON Orders.productid = Products.barcode) LEFT OUTER JOIN Persons ON Persons.personid = orderuser) WHERE personid = ? ", [query.user], function (err, rows) {
                 if (err) {
                     return callback(err);
                 }

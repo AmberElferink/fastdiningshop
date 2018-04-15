@@ -1,3 +1,5 @@
+//this file will add the information of a new user to the database
+//this information is taken from the input field in the form of the register.hbs
 
     function register() {
         $.ajax({

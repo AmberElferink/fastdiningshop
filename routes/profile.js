@@ -7,12 +7,7 @@ var express = require('express');
 var router = express.Router();
 var app = express();
 session = require('express-session');
-/*
-router.get('/:username',auth, function(req, res, next) {
-    console.log(req.param('username'));
-    res.render('profile', {title: 'Profile Fast Dining', layout: 'layoutProfile'});
 
-});*/
 //authorises if the user may access the page
 var auth = function (req, res, next) {
     if(req.query.user == undefined) //the path is /profile, without a query

@@ -1,3 +1,7 @@
+//this file will show the order history of the logedin user.
+//it will show the orderid, the title of title of the products and the image of the product.
+
+
 var personid;
 
 findLoggedInUser(function () {
@@ -31,7 +35,8 @@ function findLoggedInUser(callback) {
         });
 }
 
-//tekent de productboxen
+
+//this function will call the drawOrders function
 function drawOrders(returnValues) {
 
 
@@ -46,14 +51,11 @@ function drawOrders(returnValues) {
     }
 }
 
+//this class is used to make the order boxes
 var OrderBox = class{
     constructor(name, image, orderid){
 
-
-
         this.draw = function () {
-
-
 
             var box = document.createElement("article");
             box.setAttribute("class", "orderBox");
@@ -92,6 +94,7 @@ var OrderBox = class{
 
 }}
 
+//this function will get the information needed out of the database
 function OrderHistory(callback, user) {
     console.log("user");
     console.log(user);

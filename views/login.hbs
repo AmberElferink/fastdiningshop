@@ -16,25 +16,25 @@
         </ul>
     </section>
     {{/if}} --->
-<section name="login">
+<section name="login" id="loginsection">
     <div class="input">
-        <label>Username</label>
-        <input type="text" id="username" name="username" placeholder="your login name">
+        <label>Username</label> <BR>
+        <input class ="inputlabel" type="text" id="username" name="username" placeholder="your login name">
     </div>
     <!--- <div class="input">
         <label>Email</label>
         <input type="text" id="email" name="email" placeholder="your email address">
     </div> --->
     <div class="input">
-        <label>Password</label>
-        <input type="password" id="password" name="password" placeholder="your password">
+        <label>Password</label> <BR>
+        <input class="inputlabel" type="password" id="password" name="password" placeholder="your password">
     </div>
     <!--- <div class="input">
         <label>Confirm Password</label>
         <input type="password" id="confirmPassword" name="confirmPassword" placeholder="enter your password again">
     </div> --->
 
-    <button onclick="validate()">Log in</button>
+    <button class="profilebutton" onclick="validate()">Log in</button>
     <br>
     <a href="/register">Or click here to register</a>
 </section>

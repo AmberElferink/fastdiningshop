@@ -1,16 +1,20 @@
-
+// this file completly generates the recap page in javascript.
+// it is a summary of the content of the website and shows the title of the different recipies
+// you have the choice to ses a discription of the recipie and the ingredient when you hit the buttons
 // references used for this code
 // https://www.youtube.com/watch?v=XQEfWd1lh4Q
 // https://stackoverflow.com/questions/9831074/dynamically-create-link-javascript
 
-
+//this class makes the boxes that contain the different ellements
 var box = class {
     constructor(title){
         this.title = title;
         this.draw = function () {
+            //this will create a new section element
             var node = document.createElement("section");
-            node.setAttribute("class", "section");
+            node.setAttribute("class", "boxSection");
 
+            //this will create the title of the recipie
             var title = document.createElement("h1");
             title.setAttribute("class", "boxTitle");
             var textnode = document.createTextNode(this.title);
@@ -27,30 +31,31 @@ var box = class {
     };
 };
 
+//this class extends the box class with the description of the recipie
 class recipe extends box {
     constructor(title, text, link) {
         super(title);
         this.addAttributes = function (node) {
 
-
+            //this creates a new element
             var article = document.createElement('article');
             article.setAttribute("class", "closed");
 
+            //this will create a link to the full recipie
             var a = document.createElement('a');
             a.href =  link;
             a.innerHTML = "link";
             article.appendChild(a);
 
+            //this will create a new text description of the recipie
             var paragraph = document.createElement('p');
-
             var textNode = document.createTextNode(text);
             paragraph.appendChild(textNode);
             article.appendChild(paragraph);
 
-
-
             node.appendChild(article);
 
+            //this will create a button to show all the above
             var button = document.createElement('button');
             button.setAttribute("class", "showmore");
             button.appendChild(document.createTextNode("Show More"));
@@ -60,15 +65,18 @@ class recipe extends box {
     }
 }
 
+//this class will show the ingredients  of the recipie
 class ingredients {
     constructor(ingredients) {
 
         this.addAttributes = function (node) {
 
 
+            //will make a new article
             var article = document.createElement('article');
             article.setAttribute("class", "closed");
 
+            //creates the list of ingredients
             var list = document.createElement('ul');
 
             for(var i =0; i<ingredients.length; i++)
@@ -81,11 +89,13 @@ class ingredients {
 
             node.appendChild(article);
 
+            //creates the button to show the ingredients
             var button = document.createElement('button');
             button.setAttribute("class", "showIngredients");
             button.appendChild(document.createTextNode("Show Ingredients"));
             node.appendChild(button);
         };
+
         this.draw = function () {
             var node = document.createElement("section");
             node.setAttribute("class", "section");
@@ -96,6 +106,8 @@ class ingredients {
         };
     }
 }
+
+
 //ingredient lists starters
 
 ingredientsMelon = new ingredients(
@@ -211,6 +223,7 @@ ingredientsBrownie = new ingredients(
 
 
 // all starter method recaps
+
 recipeMelon = new recipe(
     "Watermelon and Feta Salad",
     "This salad is a great starter for any occasion. With the fresh flavor of watermelon and the creamyness of feta, is this a perfect starter for summer. It takes only 10 minutes!",
@@ -294,9 +307,10 @@ ingredientsBrownie.draw();
 
 
 
-
+//if the button is clicked then
 $(":button").click( function() {
     {
+        //if the text is already visible then
         if (this.previousSibling.className == "open") {
             //als het stukje uitleg voor de knop open is, haalt hij class open weg, en sluit hij dus
             this.previousSibling.classList.remove("open");
@@ -308,8 +322,8 @@ $(":button").click( function() {
             else{
                 this.innerHTML = "Show More";
             }
+        //if you want to see the text
         } else if(this.previousSibling.className == "closed") {
-            //als het stukje uitleg ervoor niet open is, gaat hij open
             this.previousSibling.className = "open";
             if(this.className == "showIngredients")
             {

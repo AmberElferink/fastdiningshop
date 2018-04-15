@@ -1,3 +1,5 @@
+
+
 html, body {
   height: 100%;
 }
@@ -40,6 +42,7 @@ li a {
 
 li a:hover {
   background-color: #801D18;
+    color: white;
 }
 
 .navigation {
@@ -49,6 +52,7 @@ li a:hover {
   padding: 0;
   overflow: hidden;
   background-color: #B02721;
+    width: 75%;
 }
 
 .dropdown-toggle {
@@ -87,7 +91,7 @@ img.icon{
   margin-right: auto;
   width: 50%;
   height: 315px;
-  frameborder: 0px;
+  border: 0px;
 
 }
 
@@ -137,7 +141,7 @@ table.paleRedRows tbody td {
 
 aside.sidenav {
   height: 100%;
-  width: 350px;
+  width: 250px;
   position: fixed;
   top: 0;
   right: 0;
@@ -146,19 +150,9 @@ aside.sidenav {
     z-index: 100;
 }
 
-
-
-.favorites {
-  height: 50%;
-  width: 340px;
-  float: right;
-  background: white;
-  overflow-y: auto;
-}
-
 .whiteaside{
-  min-height: 25%;
-  width: 99%;
+  height: 100%;
+  width: 100%;
   float: right;
   background: white;
   overflow-y: auto;
@@ -221,6 +215,32 @@ h1.sidenav {
   color: white;
 }
 
+.boxSection{
+    margin:0px;
+    padding: 10px;
+    width: 50%;
+    height:auto;
+
+}
+
+.boxTitle
+{
+    height: 50%;
+    width: 340px;
+    float: right;
+    overflow-y: auto;
+
+}
+
+.orderBox{
+    display: block;
+    border-style: solid;
+    border-color:#ccc;
+    border-radius: 5px;
+    width: 50%;
+    padding: 15px;
+}
+
 .closed{
   width: 300px;
   background: #FFEAEA;
@@ -254,17 +274,6 @@ h1.sidenav {
   padding: 10px 10px 10px 10px;
   color: white;
 }
-
-
-.boxTitle
-{
-  height: 50%;
-  width: 340px;
-  float: right;
-  overflow-y: auto;
-
-}
-
 
 
 .dropdown > a, .dropdown > button {
@@ -354,8 +363,9 @@ h1.sidenav {
 .productBox {
     display: block;
     border-style: solid;
+    border-color:#ccc;
     border-radius: 5px;
-    width: 500px;
+    width: 50%;
     padding: 15px;
 }
 
@@ -363,6 +373,20 @@ h1.sidenav {
     width: 80%;
 }
 
+#buyButton {
+    background-color: #B02721;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: auto;
+}
+
+#buyButton:hover{
+    background-color: #801D18 ;
+    color: white;
+}
 .productImage {
     position: relative;
     margin-left: auto;
@@ -371,12 +395,42 @@ h1.sidenav {
     width: auto;
 }
 
-.category {
-
-}
-
 .radiobuttons
 {
     list-style-type: none;
     padding: 50px;
 }
+
+.inputlabel {
+    width: 50%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+#loginsection {
+    padding: 40px;
+    margin-left: auto;
+    margin-right:auto;
+
+}
+
+
+
+.profilebutton {
+    background-color: #B02721;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 50%;
+}
+
+.profilebutton:hover{
+    background-color: #801D18 ;
+    color: white;
+}
+

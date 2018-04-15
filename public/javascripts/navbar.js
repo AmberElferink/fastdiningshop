@@ -1,3 +1,6 @@
+//this javascript file will check if the user is loged in and change the nav bar accordingly.
+//if the user is loged in he can check his history, edit his profile and log out. if not than he can log in.
+
 setUserButtons();
 
 function setUserButtons()
@@ -6,9 +9,12 @@ function setUserButtons()
         type: 'GET',
         url: './loginValidate',
         dataType: 'text',
-    })//gets the current logged in username
-    //if there is currently no logged in user, the page will referred to login. If there is a user, the page will go to the /history page belonging to that user
+    })
+    //gets the current logged in username
+    //if there is currently no logged in user, the page will referred to login
+    //if there is a user, the page will go to the /history page belonging to that user
         .done(function (data) {
+            //if the user is nog loged in
             if(data == false) {
                 $('#loginButton').show();
                 $('#editProfileButton').hide();
@@ -16,6 +22,7 @@ function setUserButtons()
                 $('#logoutButton').hide();
             }
             else {
+                //if the user is loged in
                 $('#loginButton').hide();
                 $('#editProfileButton').show();
                 $('#historyButton').show();
@@ -29,7 +36,7 @@ function setUserButtons()
 }
 
 
-
+//if the logout button is clicked on
 $('#logoutButton').click(function () {
     $.ajax({
         type: 'GET',
@@ -50,7 +57,7 @@ $('#logoutButton').click(function () {
 });
 
 
-
+//if the history button is clicked
 $('#historyButton').click(function () {
     $.ajax({
         type: 'GET',
@@ -72,6 +79,7 @@ $('#historyButton').click(function () {
         });
 });
 
+//if the edit button is clicked
 $('#editProfileButton').click(function () {
     $.ajax({
         type: 'GET',

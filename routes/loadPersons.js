@@ -8,9 +8,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/login', function (req, res) {
-    //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
-    //alles binnen deze functie doet hij pas nadat de callback is uitgevoerd. Als je res.send(data);
-    //dus onder de }); zet, dan krijg je undefined terug omdat de callback nog niet klaar was, toen hij was uitgevoerd
+    //this function is were the callback(undefined, rows) is called
+    //everything inside this function is done after the callback is done, if you put res.send(data);
+    //under the });, it gives you back undefined because is was not done, when called upon
     readPersonsFromDatabase(function(err, returnValues){
         var data = returnValues;
         res.send(data);
@@ -19,8 +19,7 @@ router.get('/login', function (req, res) {
 
 module.exports = router;
 
-
-
+//this function read all of the persons from the database
 function readPersonsFromDatabase(callback, query){
     //creates a new database
     let db = new sqlite3.Database(file, (err) => {
@@ -37,21 +36,21 @@ function readPersonsFromDatabase(callback, query){
                 if (err) {
                     return callback(err);
                 }
-                //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
-                //en dan zijn de returnValues dus undefined
+                //the first needs to be undefined, because otherwise he will give the rows as error and
+                //this wil results in undefined returnValues
                 callback(undefined, rows);
             });
         }
 
         else
         {
-            console.log(query.products); //query.products is wat ingetypt is, dus waar de query op moet werken
+            console.log(query.products); //query.products is what is typed in, so where the query need to work on
             db.all("SELECT * FROM Persons WHERE Products.name LIKE 'fet'", [], function (err, rows) {
                 if (err) {
                     return callback(err);
                 }
-                //de eerste moet je op undefined zetten, omdat hij anders in de aanroep de rows als error teruggeeft,
-                //en dan zijn de returnValues dus undefined
+                //the first needs to be undefined, because otherwise he will give the rows as error and
+                //this wil results in undefined returnValues
                 callback(undefined, rows);
             });
         }
@@ -60,7 +59,7 @@ function readPersonsFromDatabase(callback, query){
 
 
 
-    //wacht tot alle queries klaar zijn en sluit de database dan af
+    //wait untill all queries are done and then exit the database
     db.close((err) => {
         if (err) {
             return console.error(err.message);
@@ -68,4 +67,3 @@ function readPersonsFromDatabase(callback, query){
         console.log('Close the database connection.');
     });}
 
-    //db.all("SELECT * FROM Products WHERE Products.name LIKE ? ", ['%' + query.products + '%'], function (err, rows) {

@@ -1,4 +1,3 @@
-//dit bestandje wordt alleen opgestart op het moment dat de server start
 
 var express = require('express');
 var router = express.Router();

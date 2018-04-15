@@ -1,17 +1,18 @@
+<!-- this file contains the layout of the login page and links the hbs file to the javascript file login -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Fast Dining - {{title}}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
-    <link rel='stylesheet' href='stylesheets/style.css' /><!-- dit zo laten staan, de express-handlebars zoekt hem automatisch in de stylesheets map-->
+    <link rel='stylesheet' href='stylesheets/style.css' /><!-- the express-handlebars will seek this automatically in the stylesheets folder-->
     <script type="text/javascript" src="libraries/jquery.min.js"></script>
 </head>
 <body>
 
-{{>header}} <!-- dit commando van express-handlebars zoekt by default in partials folder-->
+{{>header}} <!-- this command of express-handlebars seeks by default in partials folder-->
 
-{{{body}}}
+{{{body}}} <!--- this part is filled in by the view hbs files --->
 
 <!-- basis javascript van bootstrap-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

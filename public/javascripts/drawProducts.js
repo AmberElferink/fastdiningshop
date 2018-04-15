@@ -224,7 +224,7 @@ function buyProduct(barcode) {
         }
 
     });
-   
+
 }
 
 

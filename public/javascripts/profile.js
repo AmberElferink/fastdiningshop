@@ -1,3 +1,6 @@
+//this file uses the input of that the user puts in on the 'edit my profile' page and uses this data edit the database
+//it puts the new data in the database
+
 var oldUserName = "notLoggedIn";
 findLoggedInUser(function(user){});
 

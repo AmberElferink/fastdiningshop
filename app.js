@@ -23,6 +23,7 @@ var profileRouter = require('./routes/profile');
 var historyRouter = require('./routes/history');
 
 var loginValidateRouter = require('./routes/loginValidate');
+var personIdRouter = require('./routes/personid');
 
 //database communicatie bestanden
 var loadProducts = require('./routes/loadProducts');
@@ -59,6 +60,7 @@ app.use('/register', registerRouter);
 app.use('/history', historyRouter);
 
 app.use('/loginValidate', loginValidateRouter);
+app.use('/loginPersonid', personIdRouter);
 
 app.use('/api/addUserName', addUserNameRouter);
 app.use('/api/checkLogin', checkLoginRouter);

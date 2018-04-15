@@ -157,7 +157,7 @@ aside.sidenav {
 }
 
 .whiteaside{
-  height: 50%;
+  min-height: 25%;
   width: 99%;
   float: right;
   background: white;

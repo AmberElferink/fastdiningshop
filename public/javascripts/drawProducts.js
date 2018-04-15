@@ -12,7 +12,7 @@ function getProducts(){
     }
     searchProducts(function (returnValues) {
         drawProducts(returnValues);
-    }, "?products=" + products + "&category=" + $('.category:checked').attr("id") + "&orderby=" + $('.orderby:checked').attr("id"));
+    }, "?products=" + products + "&category=" + $('.category:checked').attr("id") + "&orderby=" + $('.orderby:checked').attr("id") + "&manufacturer=" + $('.manufacturer:checked').attr('id'));
     console.log(document.getElementById("productSearch").value);
     console.log($('.category:checked').attr("id"));
 
@@ -29,6 +29,10 @@ $('.category').click(function (e) {
 });
 
 $('.orderby').click(function (e) {
+    getProducts();
+});
+
+$('.manufacturer').click(function (e) {
     getProducts();
 });
 

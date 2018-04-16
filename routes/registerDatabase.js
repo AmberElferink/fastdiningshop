@@ -54,7 +54,7 @@ function addRegistryToDatabase(callback, registerData) {
         });
     });
 
-    db.all("SELECT * FROM Persons where username=?",[registerData.username], function (err, row) {
+    db.each("SELECT * FROM Persons where username=?",[registerData.username], function (err, row) {
         console.log(row);
             if (err) {
                 return callback(err);

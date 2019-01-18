@@ -52,7 +52,6 @@ li a:hover {
   padding: 0;
   overflow: hidden;
   background-color: #B02721;
-    width: 75%;
 }
 
 .dropdown-toggle {
@@ -142,9 +141,8 @@ table.paleRedRows tbody td {
 aside.sidenav {
   height: 100%;
     width: 350px;
-  position: fixed;
-  top: 0;
-  right: 0;
+  position: relative;
+  float:right;
   background-color: grey;
   overflow-x: hidden;
     z-index: 100;
@@ -358,19 +356,23 @@ h1.sidenav {
     padding: 30px;
     margin: auto;
     float: left;
+    min-width: 90%;
 }
 
 .productBox {
-    display: block;
-    border-style: solid;
-    border-color:#ccc;
-    border-radius: 5px;
-    width: 500px;;
-    padding: 15px;
-}
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  justify-content: space-between;
 
-#productBox {
-    width: 80%;
 }
 
 #buyButton {
@@ -434,3 +436,16 @@ h1.sidenav {
     color: white;
 }
 
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.dropdown > a, .dropdown > button {
+  display: block;
+  float: right;
+}
+
+.dropdown {
+  background-color:#B02721 ;
+}

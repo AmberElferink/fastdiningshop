@@ -55,7 +55,7 @@ var ProductBox = class {
 
             //creates a new article section on the webpage
             var box = document.createElement("article");
-            box.setAttribute("class", "productBox");
+            box.setAttribute("class", "productBox col-lg-4 col-sm-6");
 
             //will show the title of the product
             var title = document.createElement("h1");

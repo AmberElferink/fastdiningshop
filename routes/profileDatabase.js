@@ -29,18 +29,18 @@ router.post('/', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-    console.log(req.query.username);
+    console.log(req.query.user);
     console.log(req.session.user);
-    if(req.query.username == req.session.user)
+    if(req.session && req.query.user == req.session.user)
     {
      // console.log(req.query);
         selectProfileFromDatabase(function(err, returnValues){
             res.send(returnValues);
-        }, req.query.username);
+        }, req.query.user);
     }
     else
     {
-        res.send("not logged in as the requested user");
+        return res.sendStatus(401); //login session not active/unauthorised
     }
 });
 

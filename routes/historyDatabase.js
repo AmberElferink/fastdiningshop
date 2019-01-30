@@ -8,12 +8,19 @@ var router = express.Router();
 
 router.get('/', function (req, res) {
     //dit function deel is hetgene waarmee de callback(undefined, rows) wordt aangeroepen
-    //alles binnen deze functie doet hij pas nadat de callback is uitgevoerd. Als je res.send(data);
+    //alles binnen deze functie doet hij pas nadat readOrdersFromDatabase is uitgevoerd. Als je res.send(data);
     //dus onder de }); zet, dan krijg je undefined terug omdat de callback nog niet klaar was, toen hij was uitgevoerd
-    readOrdersFromDatabase(function(err, returnValues){
-        var data = returnValues;
-        res.send(data);
-    },req.query);
+    if(req.session && req.query.user === req.session.user)
+    {
+        readOrdersFromDatabase(function(err, returnValues){
+            var data = returnValues;
+            res.send(data);
+        },req.query);
+    }
+    else
+    {
+        return res.sendStatus(401); //login session not active/unauthorised
+    }
 });
 
 
@@ -38,8 +45,8 @@ function readOrdersFromDatabase(callback, query){
         }
         else
         {
-
-            db.all("SELECT * FROM(SELECT * FROM(SELECT personid AS orderuser, * FROM Products LEFT OUTER JOIN Orders ON Orders.productid = Products.barcode) LEFT OUTER JOIN Persons ON Persons.personid = orderuser) WHERE personid = ? ", [query.user], function (err, rows) {
+            
+            db.all("SELECT * FROM(SELECT * FROM(SELECT personid AS orderuser, * FROM Products LEFT OUTER JOIN Orders ON Orders.productid = Products.barcode) LEFT OUTER JOIN Persons ON Persons.personid = orderuser) WHERE username = ? ", [query.user], function (err, rows) {
                 if (err) {
                     return callback(err);
                 }

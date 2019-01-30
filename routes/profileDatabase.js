@@ -29,8 +29,6 @@ router.post('/', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-    console.log(req.query.user);
-    console.log(req.session.user);
     if(req.session && req.query.user == req.session.user)
     {
      // console.log(req.query);

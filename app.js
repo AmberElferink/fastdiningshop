@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressHbs = require('express-handlebars');
+session = require('express-session');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -47,6 +48,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(expressSession({secret: 'max', saveUninitialized: false, resave: false}));
 
+app.use(session({
+    path: '/profile',
+    secret: '2C44-4D44-WppQ38S',
+    resave: true,
+    saveUninitialized: false,
+    duration: 30 * 60 * 1000, //set interaction for half an hour on login
+    activeDuration: 5 * 60 * 1000, //extend session for 5 mins with interaction
+}));
+
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
@@ -73,6 +84,8 @@ app.use('/api/placeOrder', placeOrderRouter);
 app.use('/profile', profileRouter);
 
 // /profile?user=Dentist
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

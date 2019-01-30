@@ -356,7 +356,7 @@ h1.sidenav {
     padding: 30px;
     margin: auto;
     float: left;
-    min-width: 90%;
+    min-width: 95%;
 }
 
 .productBox {
@@ -372,7 +372,7 @@ h1.sidenav {
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
   justify-content: space-between;
-
+  max-height: 550px;
 }
 
 #buyButton {
@@ -393,7 +393,7 @@ h1.sidenav {
     position: relative;
     margin-left: auto;
     margin-right: auto;
-    max-height: 350px;
+    max-height: 30%;
     width: auto;
 }
 

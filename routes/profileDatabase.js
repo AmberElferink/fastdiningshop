@@ -29,15 +29,25 @@ router.post('/', function (req, res) {
 });
 
 router.get('/', function (req, res) {
-    console.log(req.query);
-    selectProfileFromDatabase(function(err, returnValues){
-        res.send(returnValues);
-    }, req.query.username);
+    console.log(req.query.username);
+    console.log(req.session.user);
+    if(req.query.username == req.session.user)
+    {
+     // console.log(req.query);
+        selectProfileFromDatabase(function(err, returnValues){
+            res.send(returnValues);
+        }, req.query.username);
+    }
+    else
+    {
+        res.send("not logged in as the requested user");
+    }
 });
 
 module.exports = router;
 
-
+//in callback wordt de hele function(err, returnValues) etc van hierboven doorgegeven
+//die functie zit dus in de variabele "callback". req.query.username zit dus in profileUser
 function selectProfileFromDatabase(callback, profileUser) {
     let db = new sqlite3.Database(file, (err) => {
         if (err) {
@@ -47,7 +57,7 @@ function selectProfileFromDatabase(callback, profileUser) {
 
     });
     db.serialize(function () {
-        console.log(profileUser);
+       // console.log(profileUser);
         db.all("SELECT firstname, surname, username, emailaddress FROM Persons WHERE username=?", [profileUser], function (err, rows) {
             console.log(rows);
             if (err) {

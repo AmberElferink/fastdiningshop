@@ -8,14 +8,7 @@ var router = express.Router();
 var app = express();
 session = require('express-session');
 
-app.use(session({
-    path: '/profile',
-    secret: '2C44-4D44-WppQ38S',
-    resave: true,
-    saveUninitialized: false,
-    duration: 30 * 60 * 1000, //set interaction for half an hour on login
-    activeDuration: 5 * 60 * 1000, //extend session for 5 mins with interaction
-}));
+
 
 /*If a get or post loads a page, for instance /myprofile, it wil look if the person is authorised to see it using this.
  */
@@ -30,7 +23,6 @@ router.post('/login', function (req, res) {
         //login is correct
         if(returnValues == true)
         {
-            req.session.username
             req.session.user = username;
             res.send(
                 {"boolLoginCorrect": returnValues, "currentuser": username}
@@ -71,15 +63,18 @@ function checkLoginWithDatabase(callback, loginData){
             db.all("SELECT * FROM Persons WHERE Persons.username = ?", [loginData.username], function (err, row) {
                 for(var i = 0; i < row.length; i++) {
                     if (err) {
+                        //calls the function in the brackets at line 29
                         return callback(err);
                     }
                     if (row == undefined) {
+                        //calls the function in the brackets at line 29
+                        //with errors = undefined and returnValues = false
                         //username not found in database
                         callback(undefined, false);
                         return;
                     }
                     else if (row[i].password == loginData.password) {
-
+                        //with errors = undefined and returnValues = true and username = loginData.username
                         callback(undefined, true, loginData.username);
                         return;
                     }

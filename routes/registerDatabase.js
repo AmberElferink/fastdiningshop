@@ -51,10 +51,11 @@ function addRegistryToDatabase(callback, registerData) {
             // get the last insert id
             console.log(`A row has been inserted with rowid ${this.lastID}`);
             console.log(registerData);
+            return console.log("Registration succesful!");
         });
     });
 
-    db.all("SELECT * FROM Persons where username=?",[registerData.username], function (err, row) {
+    db.each("SELECT * FROM Persons where username=?",[registerData.username], function (err, row) {
         console.log(row);
             if (err) {
                 return callback(err);
